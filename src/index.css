@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
+/* --- Reset & Base --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --accent: #B4592F;
+  --accent-dark: #9E4A24;
+  --deep: #33443A;
+  --serif: 'Cormorant Garamond', serif;
+  --sans: 'Jost', sans-serif;
+  --bg: #F1EDE6;
+  --text: #211C16;
+  --text-muted: #8B8272;
+  --border: rgba(33, 28, 22, 0.07);
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* --- Form Elements --- */
+input, textarea {
+  border: none;
+  background: none;
+  font-family: var(--sans);
+  color: var(--text);
+}
+
+input::placeholder, textarea::placeholder {
+  color: #A79E90;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent) !important;
+}
+
+button {
+  font-family: var(--sans);
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes aes-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes aes-fade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes aes-ken {
+  from { transform: scale(1.12); }
+  to { transform: scale(1); }
+}
+
+@keyframes aes-drop {
+  0% { transform: scaleY(0); transform-origin: top; }
+  45% { transform: scaleY(1); transform-origin: top; }
+  55% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* --- Utility Animation Classes --- */
+.animate-fade {
+  animation: aes-fade 0.8s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+}
+
+.animate-spin-slow {
+  animation: aes-spin 0.9s linear infinite;
+}
+
+.animate-ken-burns {
+  animation: aes-ken 20s ease-out both;
+}
+
+.animate-drop-loop {
+  animation: aes-drop 2.2s ease-in-out infinite;
+}
+
+/* Scroll Reveal base style */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1EDE6;
+}
+::-webkit-scrollbar-thumb {
+  background: #BFB7AA;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A79E90;
+}

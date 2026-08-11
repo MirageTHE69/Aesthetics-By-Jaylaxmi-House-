@@ -73,7 +73,7 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
           background: 'linear-gradient(to top, rgba(20,16,12,0.72), rgba(20,16,12,0.22) 45%, rgba(20,16,12,0.3))'
         }} />
         
-        <div style={{
+        <div className="sec-pad" style={{
           position: 'absolute',
           inset: 0,
           display: 'flex',
@@ -165,15 +165,15 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* Story Sections */}
-      <section ref={storyRef} style={{ padding: '110px 56px 40px' }}>
+      <section ref={storyRef} className="sec-pad" style={{ padding: '110px 56px 40px' }}>
         <div className="reveal" style={{ maxWidth: '720px', marginBottom: '90px' }}>
           <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>THE STORY</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '64px', lineHeight: 0.98, letterSpacing: '-1px' }}>
+          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(36px, 7vw, 64px)', lineHeight: 1.02, letterSpacing: '-1px' }}>
             Born of <em style={{ fontStyle: 'italic' }}>monsoon earth.</em>
           </h2>
         </div>
 
-        <div style={{
+        <div className="story-row" style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1.1fr',
           gap: '72px',
@@ -182,7 +182,7 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
         }}>
           <div className="reveal">
             <div style={{ fontSize: '11px', letterSpacing: '3px', color: '#8B8272', marginBottom: '22px', fontWeight: 500 }}>01 — THE INSPIRATION</div>
-            <h3 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '42px', lineHeight: 1.04, marginBottom: '24px' }}>After the first rain.</h3>
+            <h3 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(28px, 5vw, 42px)', lineHeight: 1.08, marginBottom: '24px' }}>After the first rain.</h3>
             <p style={{ fontSize: '16px', lineHeight: 1.85, color: '#5C554A', maxWidth: '400px' }}>
               Each June, the fields around Bhuj turn from bone-dry ochre to a deep, wet terracotta. Mitti — literally, <em>earth</em> — holds that exact moment in cloth: warm, saturated, quietly alive.
             </p>
@@ -197,24 +197,24 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
           </div>
         </div>
 
-        <div style={{
+        <div className="story-row" style={{
           display: 'grid',
           gridTemplateColumns: '1.1fr 1fr',
           gap: '72px',
           alignItems: 'center',
           marginBottom: '110px'
         }}>
-          <div className="reveal" style={{ aspectRatio: '4/4.4', overflow: 'hidden' }}>
-            <img 
-              src={mittiCraft} 
-              alt="Hands weaving at a pit loom" 
-              style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s ease' }} 
+          <div className="reveal story-row-img" style={{ aspectRatio: '4/4.4', overflow: 'hidden' }}>
+            <img
+              src={mittiCraft}
+              alt="Hands weaving at a pit loom"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s ease' }}
               className="zoom-hover-img"
             />
           </div>
           <div className="reveal">
             <div style={{ fontSize: '11px', letterSpacing: '3px', color: '#8B8272', marginBottom: '22px', fontWeight: 500 }}>02 — THE CRAFT</div>
-            <h3 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '42px', lineHeight: 1.04, marginBottom: '24px' }}>Fourteen pairs of hands.</h3>
+            <h3 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(28px, 5vw, 42px)', lineHeight: 1.08, marginBottom: '24px' }}>Fourteen pairs of hands.</h3>
             <p style={{ fontSize: '16px', lineHeight: 1.85, color: '#5C554A', maxWidth: '400px' }}>
               Slub-spun cotton and mulberry silk, woven on pit looms in Bhujodi. Eleven days per bolt. The irregularity is not a flaw — it is the signature of the hand that made it.
             </p>
@@ -222,7 +222,7 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
         </div>
 
         <div className="reveal" style={{ textAlign: 'center', padding: '40px 0 90px', maxWidth: '900px', margin: '0 auto' }}>
-          <p style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontWeight: 500, fontSize: '44px', lineHeight: 1.25, color: '#2C271F', marginBottom: '28px' }}>
+          <p style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontWeight: 500, fontSize: 'clamp(26px, 5vw, 44px)', lineHeight: 1.3, color: '#2C271F', marginBottom: '28px' }}>
             “The colour of Gujarat after the first rain — held in cloth.”
           </p>
           <div style={{ fontSize: '10.5px', letterSpacing: '3px', color: '#8B8272', fontWeight: 500 }}>
@@ -232,7 +232,7 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* Texture showcase */}
-      <section style={{
+      <section className="sec-pad texture-grid" style={{
         background: 'var(--deep)',
         color: '#EFEBE3',
         display: 'grid',
@@ -261,17 +261,17 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
           <h2 style={{
             fontFamily: 'var(--serif)',
             fontWeight: 500,
-            fontSize: '54px',
-            lineHeight: 1,
+            fontSize: 'clamp(32px, 6vw, 54px)',
+            lineHeight: 1.05,
             letterSpacing: '-0.5px',
             marginBottom: '22px'
           }}>Up close,<br /><em style={{ fontStyle: 'italic' }}>it breathes.</em></h2>
           <p style={{ fontSize: '15px', lineHeight: 1.8, color: '#C7C6BC', maxWidth: '380px', marginBottom: '36px' }}>
             See how the bouclé behaves under different light — hover the swatch to move closer.
           </p>
-          
+
           {/* Light Mode Selector Toggles */}
-          <div style={{ display: 'flex', gap: '10px', marginBottom: '40px' }}>
+          <div style={{ display: 'flex', gap: '10px', marginBottom: '40px', flexWrap: 'wrap' }}>
             {TEX_MODES.map((mode, i) => (
               <button
                 key={mode.label}
@@ -313,10 +313,10 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* Colour palette circles */}
-      <section style={{ padding: '110px 56px' }}>
+      <section className="sec-pad" style={{ padding: '110px 56px' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '64px' }}>
           <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>THE PALETTE</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '56px', lineHeight: 1 }}>
+          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 56px)', lineHeight: 1.05 }}>
             Lives quietly <em style={{ fontStyle: 'italic' }}>with colour.</em>
           </h2>
         </div>
@@ -395,10 +395,10 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* Subtypes & Patterns Grid */}
-      <section style={{ padding: '0 56px 110px' }}>
+      <section className="sec-pad" style={{ padding: '0 56px 110px' }}>
         <div className="reveal" style={{ marginBottom: '48px' }}>
           <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>THE PATTERNS</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '52px', lineHeight: 1 }}>
+          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 52px)', lineHeight: 1.05 }}>
             Subtypes &amp; <em style={{ fontStyle: 'italic' }}>weaves.</em>
           </h2>
           <p style={{ fontSize: '16px', lineHeight: 1.8, color: '#5C554A', maxWidth: '560px', marginTop: '16px' }}>
@@ -406,7 +406,7 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
           </p>
         </div>
 
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
+        <div className="reveal pattern-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
           {[
             {
               name: 'Mitti Classic Solid',
@@ -489,15 +489,15 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* Specifications grid */}
-      <section style={{ padding: '0 56px 110px' }}>
+      <section className="sec-pad" style={{ padding: '0 56px 110px' }}>
         <div className="reveal" style={{ marginBottom: '48px' }}>
           <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>SPECIFICATIONS</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '52px', lineHeight: 1 }}>
+          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 52px)', lineHeight: 1.05 }}>
             The material, <em style={{ fontStyle: 'italic' }}>precisely.</em>
           </h2>
         </div>
-        
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+
+        <div className="reveal specs-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
           <div style={{ background: '#FCFAF6', padding: '30px 28px', border: '1px solid rgba(33,28,22,0.05)', boxShadow: '0 20px 50px rgba(33,28,22,0.06)' }}>
             <div style={{ fontSize: '10.5px', letterSpacing: '2.5px', color: '#8B8272', marginBottom: '14px', fontWeight: 500 }}>COMPOSITION</div>
             <div style={{ fontFamily: 'var(--serif)', fontSize: '23px', lineHeight: 1.25 }}>62% cotton, 28% silk, 10% linen</div>
@@ -534,31 +534,31 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* Why Mitti */}
-      <section style={{ padding: '0 56px 110px' }}>
+      <section className="sec-pad" style={{ padding: '0 56px 110px' }}>
         <div className="reveal" style={{ maxWidth: '820px', marginBottom: '70px' }}>
           <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>WHY MITTI</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '56px', lineHeight: 1.05, letterSpacing: '-0.5px', marginBottom: '26px' }}>
+          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(32px, 6vw, 56px)', lineHeight: 1.1, letterSpacing: '-0.5px', marginBottom: '26px' }}>
             One fabric, chosen from <em style={{ fontStyle: 'italic' }}>two hundred and fourteen.</em>
           </h2>
           <p style={{ fontSize: '16px', lineHeight: 1.85, color: '#5C554A', maxWidth: '560px' }}>
             Every year our atelier selects a single textile to define the season. Mitti won for its restraint: a colour that anchors a room without demanding it, and a weave that improves with a decade of use.
           </p>
         </div>
-        
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0, borderTop: '1px solid #DAD3C7' }}>
-          <div style={{ padding: '30px 24px 0 0', borderRight: '1px solid #DAD3C7' }}>
+
+        <div className="reveal stats-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0, borderTop: '1px solid #DAD3C7' }}>
+          <div className="stats-item" style={{ padding: '30px 24px 0 0', borderRight: '1px solid #DAD3C7' }}>
             <div style={{ fontFamily: 'var(--serif)', fontSize: '46px', color: 'var(--accent)', lineHeight: 1, marginBottom: '12px' }}>214</div>
             <div style={{ fontSize: '12.5px', letterSpacing: '1px', color: '#6B6458', lineHeight: 1.6 }}>Fabrics considered across four mills</div>
           </div>
-          <div style={{ padding: '30px 24px 0', borderRight: '1px solid #DAD3C7' }}>
+          <div className="stats-item" style={{ padding: '30px 24px 0', borderRight: '1px solid #DAD3C7' }}>
             <div style={{ fontFamily: 'var(--serif)', fontSize: '46px', color: 'var(--accent)', lineHeight: 1, marginBottom: '12px' }}>12</div>
             <div style={{ fontSize: '12.5px', letterSpacing: '1px', color: '#6B6458', lineHeight: 1.6 }}>Shortlisted for hand-feel and light response</div>
           </div>
-          <div style={{ padding: '30px 24px 0', borderRight: '1px solid #DAD3C7' }}>
+          <div className="stats-item" style={{ padding: '30px 24px 0', borderRight: '1px solid #DAD3C7' }}>
             <div style={{ fontFamily: 'var(--serif)', fontSize: '46px', color: 'var(--accent)', lineHeight: 1, marginBottom: '12px' }}>3</div>
             <div style={{ fontSize: '12.5px', letterSpacing: '1px', color: '#6B6458', lineHeight: 1.6 }}>Woven in full trial bolts and lived with</div>
           </div>
-          <div style={{ padding: '30px 0 0 24px' }}>
+          <div className="stats-item" style={{ padding: '30px 0 0 24px' }}>
             <div style={{ fontFamily: 'var(--serif)', fontSize: '46px', color: 'var(--accent)', lineHeight: 1, marginBottom: '12px' }}>1</div>
             <div style={{ fontSize: '12.5px', letterSpacing: '1px', color: '#6B6458', lineHeight: 1.6 }}>Chosen — signed by its weavers</div>
           </div>
@@ -566,20 +566,20 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* Pairs with */}
-      <section style={{ padding: '0 56px 110px' }}>
+      <section className="sec-pad" style={{ padding: '0 56px 110px' }}>
         <div className="reveal" style={{ marginBottom: '48px' }}>
           <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>MATCHING COLLECTIONS</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '52px', lineHeight: 1 }}>
+          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 52px)', lineHeight: 1.05 }}>
             Mitti <em style={{ fontStyle: 'italic' }}>pairs with.</em>
           </h2>
         </div>
 
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '2fr 1.2fr 1fr', gap: '16px', marginBottom: '16px' }}>
-          <button 
-            type="button" 
+        <div className="reveal pair-row-3" style={{ display: 'grid', gridTemplateColumns: '2fr 1.2fr 1fr', gap: '16px', marginBottom: '16px' }}>
+          <button
+            type="button"
             onClick={() => handlePairClick('Curtains')}
-            style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', height: '340px', background: '#BFB7AA', overflow: 'hidden', display: 'block' }}
             className="pair-btn"
+            style={{ position: 'relative', border: 'none', padding: 0, cursor: 'pointer', height: '340px', background: '#BFB7AA', overflow: 'hidden', display: 'block' }}
           >
             <span style={{ position: 'absolute', inset: 0, backgroundImage: `url(${mittiCurtains})`, backgroundSize: 'cover', backgroundPosition: 'center', transition: 'transform 0.4s ease' }} className="pair-bg" />
             <span style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(20,16,12,0.62), transparent 55%)' }} />
@@ -610,7 +610,7 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
           </button>
         </div>
 
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: '16px' }}>
+        <div className="reveal pair-row-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: '16px' }}>
           <button 
             type="button" 
             onClick={() => handlePairClick('Wooden Flooring')}
@@ -637,11 +637,11 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* AI visualization */}
-      <section style={{ padding: '0 56px 110px' }}>
-        <div className="reveal" style={{ background: '#FCFAF6', border: '1px solid rgba(33,28,22,0.05)', padding: '70px 64px', display: 'grid', gridTemplateColumns: '1.3fr 1fr', gap: '48px', alignItems: 'center', boxShadow: '0 24px 60px rgba(33,28,22,0.06)' }}>
+      <section className="sec-pad" style={{ padding: '0 56px 110px' }}>
+        <div className="reveal ai-viz-box" style={{ background: '#FCFAF6', border: '1px solid rgba(33,28,22,0.05)', padding: '70px 64px', display: 'grid', gridTemplateColumns: '1.3fr 1fr', gap: '48px', alignItems: 'center', boxShadow: '0 24px 60px rgba(33,28,22,0.06)' }}>
           <div>
             <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '20px', fontWeight: 500 }}>AI VISUALIZATION</div>
-            <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '48px', lineHeight: 1.02, marginBottom: '20px' }}>
+            <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(28px, 5.5vw, 48px)', lineHeight: 1.08, marginBottom: '20px' }}>
               See Mitti <em style={{ fontStyle: 'italic' }}>in your room.</em>
             </h2>
             <p style={{ fontSize: '15px', lineHeight: 1.8, color: '#5C554A', maxWidth: '460px' }}>
@@ -663,15 +663,15 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* Gallery in homes */}
-      <section style={{ padding: '0 56px 120px' }}>
+      <section className="sec-pad" style={{ padding: '0 56px 120px' }}>
         <div className="reveal" style={{ marginBottom: '48px' }}>
           <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>IN HOMES</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '52px', lineHeight: 1 }}>
+          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 52px)', lineHeight: 1.05 }}>
             Already <em style={{ fontStyle: 'italic' }}>living well.</em>
           </h2>
         </div>
-        
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '64px', alignItems: 'end', marginBottom: '90px' }}>
+
+        <div className="reveal gallery-row" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '64px', alignItems: 'end', marginBottom: '90px' }}>
           <div style={{ overflow: 'hidden', aspectRatio: '16/10' }}>
             <img src={mittiSofa} alt="Residence 41, Alkapuri" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s ease' }} className="zoom-hover-img" />
           </div>
@@ -686,7 +686,7 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
           </div>
         </div>
 
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '64px', alignItems: 'end' }}>
+        <div className="reveal gallery-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '64px', alignItems: 'end' }}>
           <div style={{ paddingBottom: '8px' }}>
             <div style={{ fontSize: '10.5px', letterSpacing: '2.5px', color: '#8B8272', marginBottom: '14px', fontWeight: 500 }}>FARMHOUSE · ANAND</div>
             <p style={{ fontSize: '15px', lineHeight: 1.8, color: '#5C554A', marginBottom: '22px' }}>
@@ -696,14 +696,14 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
               “It reads as colour from afar, texture up close.” — the design team
             </p>
           </div>
-          <div style={{ overflow: 'hidden', aspectRatio: '16/10' }}>
+          <div className="gallery-row-img-last" style={{ overflow: 'hidden', aspectRatio: '16/10' }}>
             <img src={mittiKitchen} alt="Farmhouse, Anand" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s ease' }} className="zoom-hover-img" />
           </div>
         </div>
       </section>
 
       {/* Final CTA */}
-      <section style={{ background: 'var(--deep)', color: '#EFEBE3', textAlign: 'center', padding: '130px 56px', transition: 'background-color 0.5s ease' }}>
+      <section className="sec-pad" style={{ background: 'var(--deep)', color: '#EFEBE3', textAlign: 'center', padding: '130px 56px', transition: 'background-color 0.5s ease' }}>
         <div className="reveal">
           <div style={{ fontSize: '11px', letterSpacing: '4px', color: '#C98A5E', marginBottom: '28px', fontWeight: 500 }}>FABRIC OF THE YEAR · 2027</div>
           <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(60px, 7vw, 96px)', lineHeight: 0.96, letterSpacing: '-1px', marginBottom: '44px' }}>
@@ -769,6 +769,67 @@ export default function FabricView({ onNavigate, onSelectCategory }) {
         .consult-btn:hover {
           border-color: #EFEBE3 !important;
           background: rgba(239,235,227,0.08) !important;
+        }
+
+        @media (max-width: 800px) {
+          .story-row {
+            grid-template-columns: 1fr !important;
+            gap: 28px !important;
+            margin-bottom: 64px !important;
+          }
+          .texture-grid {
+            grid-template-columns: 1fr !important;
+            padding-top: 56px !important;
+            padding-bottom: 56px !important;
+          }
+          .pattern-grid-4, .specs-grid-4 {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .stats-grid-4 {
+            grid-template-columns: repeat(2, 1fr) !important;
+            row-gap: 28px !important;
+          }
+          .stats-item:nth-child(odd) {
+            border-right: 1px solid #DAD3C7 !important;
+            padding-left: 0 !important;
+          }
+          .stats-item:nth-child(even) {
+            border-right: none !important;
+            padding-left: 24px !important;
+          }
+          .pair-row-3 {
+            grid-template-columns: 1fr !important;
+            margin-bottom: 16px !important;
+          }
+          .pair-row-2 {
+            grid-template-columns: 1fr !important;
+          }
+          .pair-btn {
+            height: 220px !important;
+          }
+          .ai-viz-box {
+            grid-template-columns: 1fr !important;
+            padding: 40px 28px !important;
+          }
+          .gallery-row {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+            margin-bottom: 56px !important;
+          }
+          .gallery-row-img-last {
+            order: -1;
+          }
+        }
+        @media (max-width: 460px) {
+          .pattern-grid-4, .specs-grid-4, .stats-grid-4 {
+            grid-template-columns: 1fr !important;
+          }
+          .stats-item, .stats-item:nth-child(odd), .stats-item:nth-child(even) {
+            border-right: none !important;
+            padding-left: 0 !important;
+            border-bottom: 1px solid #DAD3C7;
+            padding-bottom: 24px !important;
+          }
         }
       `}</style>
     </main>

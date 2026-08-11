@@ -25,7 +25,7 @@ export default function CategoryView({ category, onNavigate, onSelectCategory, o
   return (
     <main className="animate-fade">
       {/* Breadcrumb */}
-      <div style={{ padding: '32px 56px 0' }}>
+      <div className="sec-pad" style={{ padding: '32px 56px 0' }}>
         <button
           type="button"
           onClick={() => onNavigate('collections')}
@@ -46,7 +46,7 @@ export default function CategoryView({ category, onNavigate, onSelectCategory, o
       </div>
 
       {/* Category tab switcher */}
-      <div style={{
+      <div className="sec-pad cat-tabs" style={{
         padding: '22px 56px 0',
         display: 'flex',
         gap: '10px',
@@ -78,7 +78,7 @@ export default function CategoryView({ category, onNavigate, onSelectCategory, o
       </div>
 
       {/* Hero / intro */}
-      <section style={{
+      <section className="sec-pad category-hero" style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
         alignItems: 'center',
@@ -96,8 +96,8 @@ export default function CategoryView({ category, onNavigate, onSelectCategory, o
           <h1 style={{
             fontFamily: 'var(--serif)',
             fontWeight: 500,
-            fontSize: '58px',
-            lineHeight: 1,
+            fontSize: 'clamp(34px, 7vw, 58px)',
+            lineHeight: 1.05,
             letterSpacing: '-1px',
             marginBottom: '22px'
           }}>{activeCategory}</h1>
@@ -114,7 +114,7 @@ export default function CategoryView({ category, onNavigate, onSelectCategory, o
             color: '#8B8272'
           }}>{products.length} featured pieces online · {meta.studioCount}+ additional swatches in our Vadodara atelier</p>
         </div>
-        <div style={{
+        <div className="category-hero-img" style={{
           aspectRatio: '4/3.4',
           background: `#DED7CB url(${meta.hero}) center/cover no-repeat`,
           animation: 'aes-fade 0.6s ease 0.1s both'
@@ -122,8 +122,8 @@ export default function CategoryView({ category, onNavigate, onSelectCategory, o
       </section>
 
       {/* Product grid */}
-      <section style={{ padding: '0 56px 90px' }}>
-        <div style={{
+      <section className="sec-pad" style={{ padding: '0 56px 90px' }}>
+        <div className="category-product-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
           gap: '32px 24px'
@@ -135,7 +135,7 @@ export default function CategoryView({ category, onNavigate, onSelectCategory, o
       </section>
 
       {/* AI CTA band */}
-      <section style={{
+      <section className="sec-pad" style={{
         background: 'var(--deep)',
         color: '#EFEBE3',
         padding: '64px 56px',
@@ -148,7 +148,7 @@ export default function CategoryView({ category, onNavigate, onSelectCategory, o
       }}>
         <div>
           <div style={{ fontSize: '11px', letterSpacing: '3px', color: '#C98A5E', marginBottom: '14px', fontWeight: 500 }}>NOT SURE WHICH TO PICK?</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '34px', lineHeight: 1.1, margin: 0 }}>
+          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(24px, 5vw, 34px)', lineHeight: 1.15, margin: 0 }}>
             See {activeCategory.toLowerCase()} <em style={{ fontStyle: 'italic' }}>in your own room.</em>
           </h2>
         </div>
@@ -177,6 +177,30 @@ export default function CategoryView({ category, onNavigate, onSelectCategory, o
       <style>{`
         .accent-btn:hover {
           background-color: var(--accent-dark) !important;
+        }
+        @media (max-width: 800px) {
+          .category-hero {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+            padding-top: 40px !important;
+            padding-bottom: 56px !important;
+          }
+          .category-hero-img {
+            aspect-ratio: 4/3 !important;
+          }
+          .category-product-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 24px 16px !important;
+          }
+          .cat-tabs button {
+            padding: 8px 13px !important;
+            font-size: 11px !important;
+          }
+        }
+        @media (max-width: 420px) {
+          .category-product-grid {
+            grid-template-columns: 1fr !important;
+          }
         }
       `}</style>
     </main>

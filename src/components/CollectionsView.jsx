@@ -29,7 +29,7 @@ export default function CollectionsView({ onNavigate, onSelectCategory }) {
   };
 
   return (
-    <main style={{ padding: '74px 56px 110px' }} className="animate-fade">
+    <main className="sec-pad animate-fade" style={{ padding: '74px 56px 110px' }}>
       <div style={{
         fontSize: '11px',
         letterSpacing: '3.5px',
@@ -37,18 +37,18 @@ export default function CollectionsView({ onNavigate, onSelectCategory }) {
         marginBottom: '18px',
         fontWeight: 500
       }}>THE COLLECTIONS</div>
-      
+
       <h1 style={{
         fontFamily: 'var(--serif)',
         fontWeight: 500,
-        fontSize: '76px',
-        lineHeight: 0.98,
+        fontSize: 'clamp(38px, 8vw, 76px)',
+        lineHeight: 1,
         letterSpacing: '-1px',
         marginBottom: '20px'
       }}>
         Curated by <em style={{ fontStyle: 'italic' }}>material.</em>
       </h1>
-      
+
       <p style={{
         fontSize: '16px',
         lineHeight: 1.75,
@@ -60,7 +60,7 @@ export default function CollectionsView({ onNavigate, onSelectCategory }) {
       </p>
 
       {/* Grid of categories */}
-      <div style={{
+      <div className="collections-cat-grid" style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(4, 1fr)',
         gap: '16px'
@@ -116,6 +116,16 @@ export default function CollectionsView({ onNavigate, onSelectCategory }) {
         }
         .category-card:hover {
           filter: brightness(0.95);
+        }
+        @media (max-width: 800px) {
+          .collections-cat-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 420px) {
+          .collections-cat-grid {
+            grid-template-columns: 1fr !important;
+          }
         }
       `}</style>
     </main>

@@ -11,13 +11,13 @@ export default function Footer({ onNavigate }) {
   };
 
   return (
-    <footer style={{
+    <footer className="sec-pad" style={{
       background: 'var(--deep)',
       color: '#C7C6BC',
       padding: '70px 56px 44px',
       transition: 'background-color 0.5s ease'
     }}>
-      <div style={{
+      <div className="footer-grid" style={{
         display: 'grid',
         gridTemplateColumns: '2fr 1fr 1fr 1fr',
         gap: '40px',
@@ -157,6 +157,8 @@ export default function Footer({ onNavigate }) {
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '8px',
         paddingTop: '24px',
         fontSize: '11px',
         letterSpacing: '1px',
@@ -165,6 +167,20 @@ export default function Footer({ onNavigate }) {
         <span>© 1972–2026 Jaylaxmi House</span>
         <span>Vadodara · Gujarat · India</span>
       </div>
+
+      <style>{`
+        @media (max-width: 800px) {
+          .footer-grid {
+            grid-template-columns: 1fr 1fr !important;
+            row-gap: 40px !important;
+          }
+        }
+        @media (max-width: 500px) {
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 }

@@ -43,7 +43,7 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
   return (
     <main className="animate-fade">
       {/* Breadcrumb */}
-      <div style={{ padding: '32px 56px 0', display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+      <div className="sec-pad" style={{ padding: '32px 56px 0', display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
         <button type="button" onClick={() => onNavigate('collections')} style={crumbStyle}>COLLECTIONS</button>
         <span style={{ color: '#C7BEB0', fontSize: '11px' }}>/</span>
         <button
@@ -56,7 +56,7 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
       </div>
 
       {/* Main product section */}
-      <section style={{
+      <section className="sec-pad product-main" style={{
         display: 'grid',
         gridTemplateColumns: '1.1fr 1fr',
         gap: '64px',
@@ -65,7 +65,7 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
       }}>
         {/* Gallery */}
         <div key={productId} style={{ animation: 'aes-fade 0.4s ease both' }}>
-          <div style={{ aspectRatio: '4/3.6', overflow: 'hidden', background: '#BFB7AA', marginBottom: '14px' }}>
+          <div className="product-main-img" style={{ aspectRatio: '4/3.6', overflow: 'hidden', background: '#BFB7AA', marginBottom: '14px' }}>
             <img
               src={product.images[activeImage]}
               alt={product.name}
@@ -79,6 +79,7 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
                   key={i}
                   type="button"
                   onClick={() => setActiveImage(i)}
+                  className="product-thumb"
                   style={{
                     width: '84px',
                     height: '84px',
@@ -102,7 +103,7 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
           <div style={{ fontSize: '11px', letterSpacing: '3px', color: 'var(--accent)', marginBottom: '16px', fontWeight: 500 }}>
             {product.category.toUpperCase()}
           </div>
-          <h1 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '48px', lineHeight: 1.02, marginBottom: '18px' }}>
+          <h1 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 48px)', lineHeight: 1.05, marginBottom: '18px' }}>
             {product.name}
           </h1>
           <div style={{ fontFamily: 'ui-monospace, monospace', fontSize: '17px', color: '#3A342B', marginBottom: '28px' }}>
@@ -140,7 +141,7 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
           </div>
 
           {/* Specs */}
-          <div style={{
+          <div className="product-specs" style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
             gap: '18px 24px',
@@ -180,14 +181,14 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
 
       {/* Related products */}
       {related.length > 0 && (
-        <section style={{ padding: '0 56px 110px', borderTop: '1px solid rgba(33,28,22,0.08)' }}>
+        <section className="sec-pad" style={{ padding: '0 56px 110px', borderTop: '1px solid rgba(33,28,22,0.08)' }}>
           <div style={{ padding: '64px 0 40px' }}>
             <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '16px', fontWeight: 500 }}>MORE FROM {product.category.toUpperCase()}</div>
-            <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '38px', lineHeight: 1 }}>
+            <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(26px, 5vw, 38px)', lineHeight: 1.05 }}>
               You may also <em style={{ fontStyle: 'italic' }}>like.</em>
             </h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: `repeat(${related.length}, 1fr)`, gap: '32px 24px' }}>
+          <div className="related-grid" style={{ display: 'grid', gridTemplateColumns: `repeat(${related.length}, 1fr)`, gap: '32px 24px' }}>
             {related.map(p => (
               <ProductCard key={p.id} product={p} onSelect={handleSelectRelated} />
             ))}
@@ -202,6 +203,32 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
         .outline-btn:hover {
           background: #3A342B !important;
           color: #fff !important;
+        }
+        @media (max-width: 800px) {
+          .product-main {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+            padding-top: 24px !important;
+          }
+          .product-main-img {
+            aspect-ratio: 4/3.4 !important;
+          }
+          .product-thumb {
+            width: 68px !important;
+            height: 68px !important;
+          }
+          .related-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 24px 16px !important;
+          }
+        }
+        @media (max-width: 460px) {
+          .product-specs {
+            grid-template-columns: 1fr !important;
+          }
+          .related-grid {
+            grid-template-columns: 1fr !important;
+          }
         }
       `}</style>
     </main>

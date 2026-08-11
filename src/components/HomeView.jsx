@@ -65,7 +65,7 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
   return (
     <main className="animate-fade">
       {/* Hero Section */}
-      <section style={{
+      <section className="sec-pad home-hero" style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
         alignItems: 'center',
@@ -83,7 +83,7 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
           <h1 style={{
             fontFamily: 'var(--serif)',
             fontWeight: 500,
-            fontSize: '92px',
+            fontSize: 'clamp(44px, 8.5vw, 92px)',
             lineHeight: 0.94,
             letterSpacing: '-1px',
             marginBottom: '30px'
@@ -100,9 +100,9 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
           }}>
             Curtains, upholstery, flooring and home textiles — designed in our Vadodara atelier and made to the measure of your space.
           </p>
-          <button 
-            type="button" 
-            onClick={() => onNavigate('collections')} 
+          <button
+            type="button"
+            onClick={() => onNavigate('collections')}
             style={{
               border: 'none',
               background: 'none',
@@ -120,16 +120,17 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
             EXPLORE COLLECTIONS &nbsp;→
           </button>
         </div>
-        <div style={{
+        <div className="home-hero-img" style={{
           aspectRatio: '4/4.4',
           background: `#DED7CB url(${heroLiving}) center/cover no-repeat`
         }}></div>
       </section>
 
       {/* Fabric of the Year Band */}
-      <button 
-        type="button" 
-        onClick={() => onNavigate('fabric')} 
+      <button
+        type="button"
+        onClick={() => onNavigate('fabric')}
+        className="sec-pad fabric-band-btn"
         style={{
           display: 'flex',
           width: '100%',
@@ -145,9 +146,8 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
           textAlign: 'left',
           transition: 'background 0.25s ease'
         }}
-        className="fabric-band-btn"
       >
-        <span style={{
+        <span className="fabric-band-eyebrow" style={{
           fontFamily: 'var(--sans)',
           fontSize: '10.5px',
           letterSpacing: '3px',
@@ -155,7 +155,7 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
           whiteSpace: 'nowrap',
           fontWeight: 500
         }}>FABRIC OF THE YEAR · 2027</span>
-        <span style={{
+        <span className="fabric-band-title" style={{
           fontFamily: 'var(--serif)',
           fontStyle: 'italic',
           fontSize: '24px',
@@ -164,7 +164,7 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
           paddingLeft: '20px',
           paddingRight: '20px'
         }}>Mitti — a handloom bouclé from the earth of Kutch.</span>
-        <span style={{
+        <span className="fabric-band-cta" style={{
           fontFamily: 'var(--sans)',
           fontSize: '10.5px',
           letterSpacing: '3px',
@@ -177,15 +177,15 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
       </button>
 
       {/* Philosophy & Craft Standards Section */}
-      <section style={{ padding: '110px 56px', background: '#FCFAF6', borderBottom: '1px solid rgba(33,28,22,0.08)' }}>
+      <section className="sec-pad" style={{ padding: '110px 56px', background: '#FCFAF6', borderBottom: '1px solid rgba(33,28,22,0.08)' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '80px' }}>
           <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>OUR APPROACH</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '56px', lineHeight: 1, letterSpacing: '-0.5px' }}>
+          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(32px, 6vw, 56px)', lineHeight: 1.05, letterSpacing: '-0.5px' }}>
             Weaving heritage <em style={{ fontStyle: 'italic' }}>into modern spaces.</em>
           </h2>
         </div>
 
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '48px' }}>
+        <div className="reveal philosophy-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '48px' }}>
           <div style={{ borderTop: '1px solid rgba(33,28,22,0.16)', paddingTop: '32px' }}>
             <div style={{ fontFamily: 'var(--serif)', fontSize: '24px', fontWeight: 500, marginBottom: '16px', color: '#211C16' }}>01 · Made to Measure</div>
             <p style={{ fontSize: '14.5px', lineHeight: 1.75, color: '#5C554A', margin: 0 }}>
@@ -208,7 +208,7 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* Green AI Teaser */}
-      <section style={{
+      <section className="ai-teaser" style={{
         background: 'var(--deep)',
         color: '#EFEBE3',
         display: 'grid',
@@ -216,7 +216,7 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
         gap: 0,
         transition: 'background-color 0.5s ease'
       }}>
-        <div style={{ padding: '96px 56px 96px 56px', alignSelf: 'center' }}>
+        <div className="sec-pad ai-teaser-text" style={{ padding: '96px 56px 96px 56px', alignSelf: 'center' }}>
           <div style={{
             fontSize: '11px',
             letterSpacing: '3.5px',
@@ -227,8 +227,8 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
           <h2 style={{
             fontFamily: 'var(--serif)',
             fontWeight: 500,
-            fontSize: '60px',
-            lineHeight: 1.0,
+            fontSize: 'clamp(34px, 6vw, 60px)',
+            lineHeight: 1.05,
             letterSpacing: '-0.5px',
             marginBottom: '26px'
           }}>
@@ -244,9 +244,9 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
           }}>
             Pick a category. Choose your mood, colour palette and style. Our AI generates photorealistic concept images of your space — then our atelier brings them to life.
           </p>
-          <button 
-            type="button" 
-            onClick={() => onNavigate('customize')} 
+          <button
+            type="button"
+            onClick={() => onNavigate('customize')}
             style={{
               border: 'none',
               background: 'var(--accent)',
@@ -267,7 +267,7 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
             ✦ START DESIGNING
           </button>
         </div>
-        <div style={{
+        <div className="ai-teaser-imgs" style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
           gridTemplateRows: '1fr 1fr',
@@ -294,8 +294,8 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* Collections Section */}
-      <section style={{ padding: '96px 56px 110px' }}>
-        <div style={{
+      <section className="sec-pad" style={{ padding: '96px 56px 110px' }}>
+        <div className="collections-head" style={{
           display: 'flex',
           alignItems: 'flex-end',
           justifyContent: 'space-between',
@@ -312,8 +312,8 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
             <h2 style={{
               fontFamily: 'var(--serif)',
               fontWeight: 500,
-              fontSize: '52px',
-              lineHeight: 1,
+              fontSize: 'clamp(32px, 6vw, 52px)',
+              lineHeight: 1.05,
               letterSpacing: '-0.5px'
             }}>
               Everything for the<br />
@@ -345,11 +345,12 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
             const isDimmed = hoverCat >= 0 && !isHovered;
 
             return (
-              <button 
+              <button
                 key={name}
-                type="button" 
+                type="button"
                 onClick={() => handleCategoryClick(name)}
                 onMouseEnter={() => setHoverCat(i)}
+                className="cat-row"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: '80px 1fr auto',
@@ -372,9 +373,9 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
                   color: '#8B8272'
                 }}>0{i + 1}</span>
 
-                <span style={{
+                <span className="cat-row-name" style={{
                   fontFamily: 'var(--serif)',
-                  fontSize: '54px',
+                  fontSize: 'clamp(22px, 6vw, 54px)',
                   fontWeight: 500,
                   lineHeight: 1,
                   fontStyle: isHovered ? 'italic' : 'normal',
@@ -385,7 +386,7 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
                   {name}
                 </span>
 
-                <span style={{
+                <span className="cat-row-count" style={{
                   fontFamily: 'var(--sans)',
                   fontSize: '10.5px',
                   letterSpacing: '2.5px',
@@ -438,10 +439,10 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* Curated Moodboards Section */}
-      <section style={{ padding: '110px 56px', background: '#FAF6F0', borderTop: '1px solid rgba(33,28,22,0.06)' }}>
+      <section className="sec-pad" style={{ padding: '110px 56px', background: '#FAF6F0', borderTop: '1px solid rgba(33,28,22,0.06)' }}>
         <div className="reveal" style={{ marginBottom: '56px' }}>
           <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>STYLED CONCEPT MOODBOARDS</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '52px', lineHeight: 1, letterSpacing: '-0.5px' }}>
+          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 52px)', lineHeight: 1.05, letterSpacing: '-0.5px' }}>
             Mix &amp; match <em style={{ fontStyle: 'italic' }}>our collections.</em>
           </h2>
           <p style={{ fontSize: '16.5px', lineHeight: 1.8, color: '#5C554A', maxWidth: '560px', marginTop: '16px' }}>
@@ -449,10 +450,10 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
           </p>
         </div>
 
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
+        <div className="reveal moodboard-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
           {/* Moodboard A */}
           <div style={{ background: '#FCFAF6', border: '1px solid rgba(33,28,22,0.06)', overflow: 'hidden', transition: 'box-shadow 0.3s ease' }} className="moodboard-card">
-            <div style={{ height: '420px', overflow: 'hidden' }}>
+            <div className="moodboard-img-wrap" style={{ height: '420px', overflow: 'hidden' }}>
               <img 
                 src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1000&q=80" 
                 alt="The Kutch Ochre Minimalist" 
@@ -478,9 +479,9 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
 
           {/* Moodboard B */}
           <div style={{ background: '#FCFAF6', border: '1px solid rgba(33,28,22,0.06)', overflow: 'hidden', transition: 'box-shadow 0.3s ease' }} className="moodboard-card">
-            <div style={{ height: '420px', overflow: 'hidden' }}>
-              <img 
-                src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=1000&q=80" 
+            <div className="moodboard-img-wrap" style={{ height: '420px', overflow: 'hidden' }}>
+              <img
+                src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=1000&q=80"
                 alt="The Indigo Dwelling" 
                 style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s ease' }} 
                 className="moodboard-img"
@@ -505,15 +506,15 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* Testimonials Section */}
-      <section style={{ padding: '110px 56px', background: '#FCFAF6', borderTop: '1px solid rgba(33,28,22,0.06)' }}>
+      <section className="sec-pad" style={{ padding: '110px 56px', background: '#FCFAF6', borderTop: '1px solid rgba(33,28,22,0.06)' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '64px' }}>
           <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>COMMUNITY &amp; PRESS</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '52px', lineHeight: 1 }}>
+          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 52px)', lineHeight: 1.05 }}>
             Living with <em style={{ fontStyle: 'italic' }}>Aesthetics.</em>
           </h2>
         </div>
 
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', maxWidth: '1080px', margin: '0 auto' }}>
+        <div className="reveal testimonial-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', maxWidth: '1080px', margin: '0 auto' }}>
           <div style={{ borderLeft: '3px solid var(--accent)', paddingLeft: '28px' }}>
             <p style={{ fontFamily: 'var(--serif)', fontSize: '21px', fontStyle: 'italic', lineHeight: 1.6, color: '#2C271F', marginBottom: '18px' }}>
               “Aesthetics transformed our Alkapuri residence. The Mitti curtains catch the morning light beautifully, and the tailoring craftsmanship is unmatched in India.”
@@ -534,11 +535,11 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
       </section>
 
       {/* Showroom Flagship Centre Section */}
-      <section style={{ padding: '0 56px 110px', background: '#FCFAF6' }}>
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '64px', background: '#EAE3D5', border: '1px solid rgba(33,28,22,0.06)', overflow: 'hidden' }}>
-          <div style={{ padding: '74px 64px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <section className="sec-pad" style={{ padding: '0 56px 110px', background: '#FCFAF6' }}>
+        <div className="reveal showroom-grid" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '64px', background: '#EAE3D5', border: '1px solid rgba(33,28,22,0.06)', overflow: 'hidden' }}>
+          <div className="showroom-text" style={{ padding: '74px 64px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div style={{ fontSize: '10px', letterSpacing: '3px', color: 'var(--accent)', marginBottom: '20px', fontWeight: 600 }}>OUR EXPERIENCE STUDIO</div>
-            <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '48px', lineHeight: 1.08, marginBottom: '24px', color: '#211C16' }}>
+            <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(28px, 5.5vw, 48px)', lineHeight: 1.1, marginBottom: '24px', color: '#211C16' }}>
               Visit our flagship <em style={{ fontStyle: 'italic' }}>Atelier.</em>
             </h2>
             <p style={{ fontSize: '15px', lineHeight: 1.8, color: '#5C554A', marginBottom: '32px', maxWidth: '440px' }}>
@@ -560,9 +561,9 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
               </button>
             </div>
           </div>
-          <div style={{ overflow: 'hidden', height: '100%', minHeight: '440px' }}>
-            <img 
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80" 
+          <div className="showroom-img-wrap" style={{ overflow: 'hidden', height: '100%', minHeight: '440px' }}>
+            <img
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80"
               alt="Aesthetics Vadodara Showroom" 
               style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s ease' }} 
               className="showroom-img"
@@ -588,6 +589,92 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
         .showroom-btn:hover {
           background-color: var(--accent) !important;
           color: #fff !important;
+        }
+
+        @media (max-width: 800px) {
+          .home-hero {
+            grid-template-columns: 1fr !important;
+            gap: 36px !important;
+            padding-top: 48px !important;
+            padding-bottom: 56px !important;
+          }
+          .home-hero-img {
+            aspect-ratio: 4/3.2 !important;
+          }
+          .fabric-band-btn {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+            padding-top: 22px !important;
+            padding-bottom: 22px !important;
+          }
+          .fabric-band-title {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            font-size: 19px !important;
+          }
+          .philosophy-grid {
+            grid-template-columns: 1fr !important;
+            gap: 36px !important;
+          }
+          .ai-teaser {
+            grid-template-columns: 1fr !important;
+          }
+          .ai-teaser-text {
+            padding-top: 64px !important;
+            padding-bottom: 48px !important;
+          }
+          .ai-teaser-imgs {
+            padding: 0 24px 56px !important;
+          }
+          .collections-head {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 16px !important;
+          }
+          .collections-head p {
+            max-width: none !important;
+          }
+          .cat-row {
+            grid-template-columns: 32px 1fr !important;
+            padding: 22px 4px !important;
+            row-gap: 8px !important;
+          }
+          .cat-row-count {
+            grid-column: 2 / 3;
+            font-size: 9.5px !important;
+            letter-spacing: 1.5px !important;
+          }
+          .moodboard-grid {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+          }
+          .moodboard-img-wrap {
+            height: 300px !important;
+          }
+          .testimonial-grid {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+          }
+          .showroom-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .showroom-text {
+            padding: 48px 28px !important;
+          }
+          .showroom-img-wrap {
+            min-height: 260px !important;
+          }
+        }
+
+        @media (max-width: 420px) {
+          .fabric-band-eyebrow {
+            font-size: 9.5px !important;
+            letter-spacing: 2px !important;
+          }
+          .fabric-band-cta {
+            font-size: 9.5px !important;
+          }
         }
       `}</style>
     </main>

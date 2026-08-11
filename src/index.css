@@ -27,6 +27,11 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
 }
 
 ::selection {
@@ -114,6 +119,24 @@ button {
 .reveal.active {
   opacity: 1;
   transform: none;
+}
+
+/* --- Responsive section padding ---
+   Apply className="sec-pad" to any section/main/div whose inline style
+   sets the site's standard 56px (or 64px) horizontal gutter. This overrides
+   just the horizontal padding via !important, leaving vertical padding
+   (which varies per section) untouched. */
+@media (max-width: 900px) {
+  .sec-pad {
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+}
+@media (max-width: 560px) {
+  .sec-pad {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
 }
 
 /* --- Custom Scrollbar --- */

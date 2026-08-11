@@ -29,7 +29,7 @@ export default function AtelierView() {
   ];
 
   return (
-    <main style={{ padding: '74px 56px 110px' }} className="animate-fade">
+    <main className="sec-pad animate-fade" style={{ padding: '74px 56px 110px' }}>
       <section style={{ maxWidth: '760px', marginBottom: '60px' }}>
         <div style={{
           fontSize: '11px',
@@ -41,8 +41,8 @@ export default function AtelierView() {
         <h1 style={{
           fontFamily: 'var(--serif)',
           fontWeight: 500,
-          fontSize: '72px',
-          lineHeight: 0.98,
+          fontSize: 'clamp(38px, 8vw, 72px)',
+          lineHeight: 1.02,
           letterSpacing: '-1px',
           marginBottom: '24px'
         }}>
@@ -68,7 +68,7 @@ export default function AtelierView() {
       </section>
 
       {/* Workshop Image grid */}
-      <section style={{
+      <section className="atelier-img-grid" style={{
         display: 'grid',
         gridTemplateColumns: '1.8fr 1.2fr',
         gap: '24px',
@@ -95,13 +95,13 @@ export default function AtelierView() {
       {/* Interactive Timeline Section */}
       <section style={{ marginBottom: '110px' }}>
         <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>OUR JOURNEY</div>
-        <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '52px', lineHeight: 1, letterSpacing: '-0.5px', marginBottom: '48px' }}>
+        <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 52px)', lineHeight: 1.05, letterSpacing: '-0.5px', marginBottom: '48px' }}>
           Three generations <em style={{ fontStyle: 'italic' }}>of weaving.</em>
         </h2>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '64px', alignItems: 'start' }}>
+        <div className="timeline-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '64px', alignItems: 'start' }}>
           {/* Year buttons (left) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="timeline-years" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {MILESTONES.map((milestone, idx) => (
               <button
                 key={milestone.year}
@@ -142,7 +142,7 @@ export default function AtelierView() {
           </div>
 
           {/* Details (right) */}
-          <div style={{
+          <div className="timeline-detail" style={{
             background: '#FCFAF6',
             border: '1px solid rgba(33,28,22,0.06)',
             padding: '56px',
@@ -163,7 +163,7 @@ export default function AtelierView() {
       </section>
 
       {/* Sourcing and Sustainability Standards */}
-      <section style={{
+      <section className="sustain-grid" style={{
         background: 'var(--deep)',
         color: '#EFEBE3',
         padding: '80px 64px',
@@ -175,7 +175,7 @@ export default function AtelierView() {
       }}>
         <div>
           <div style={{ fontSize: '10px', letterSpacing: '3px', color: '#C98A5E', marginBottom: '20px', fontWeight: 600 }}>SUSTAINABILITY &amp; ETHICS</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '44px', lineHeight: 1.08, marginBottom: '20px' }}>
+          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(28px, 5.5vw, 44px)', lineHeight: 1.1, marginBottom: '20px' }}>
             Restoring the craft, <em style={{ fontStyle: 'italic' }}>preserving the planet.</em>
           </h2>
           <p style={{ fontSize: '15px', lineHeight: 1.8, color: '#C7C6BC', maxWidth: '440px', margin: 0 }}>
@@ -202,6 +202,34 @@ export default function AtelierView() {
       <style>{`
         .zoom-hover-img:hover {
           transform: scale(1.04);
+        }
+        @media (max-width: 800px) {
+          .atelier-img-grid {
+            grid-template-columns: 1fr !important;
+            margin-bottom: 64px !important;
+          }
+          .timeline-grid {
+            grid-template-columns: 1fr !important;
+            gap: 28px !important;
+          }
+          .timeline-years {
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+            gap: 10px !important;
+          }
+          .timeline-years button {
+            padding: 10px 16px !important;
+            border-left: none !important;
+            border-bottom: 3px solid #ECE7DE;
+          }
+          .timeline-detail {
+            padding: 32px 24px !important;
+          }
+          .sustain-grid {
+            grid-template-columns: 1fr !important;
+            padding: 48px 24px !important;
+            gap: 40px !important;
+          }
         }
       `}</style>
     </main>

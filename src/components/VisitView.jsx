@@ -28,12 +28,12 @@ export default function VisitView() {
   };
 
   return (
-    <main style={{
+    <main className="sec-pad visit-grid animate-fade" style={{
       padding: '74px 56px 100px',
       display: 'grid',
       gridTemplateColumns: '1fr 1.15fr',
       gap: '72px'
-    }} className="animate-fade">
+    }}>
       {/* Left Column */}
       <div>
         <div style={{
@@ -43,12 +43,12 @@ export default function VisitView() {
           marginBottom: '24px',
           fontWeight: 500
         }}>GET IN TOUCH</div>
-        
+
         <h1 style={{
           fontFamily: 'var(--serif)',
           fontWeight: 500,
-          fontSize: '68px',
-          lineHeight: 0.98,
+          fontSize: 'clamp(38px, 7vw, 68px)',
+          lineHeight: 1.02,
           letterSpacing: '-1px',
           marginBottom: '48px'
         }}>
@@ -118,7 +118,7 @@ export default function VisitView() {
       </div>
 
       {/* Right Column: Consultation Form */}
-      <div style={{
+      <div className="visit-form-box" style={{
         background: '#FCFAF6',
         padding: '48px 48px 52px',
         border: '1px solid rgba(33,28,22,0.05)'
@@ -141,7 +141,7 @@ export default function VisitView() {
         </h2>
 
         <form onSubmit={handleSubmit}>
-          <div style={{
+          <div className="visit-form-grid" style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
             gap: '22px 20px',
@@ -277,6 +277,21 @@ export default function VisitView() {
       <style>{`
         .submit-btn:hover {
           background-color: var(--accent-dark) !important;
+        }
+        @media (max-width: 800px) {
+          .visit-grid {
+            grid-template-columns: 1fr !important;
+            gap: 48px !important;
+            padding-top: 48px !important;
+          }
+          .visit-form-box {
+            padding: 32px 24px 36px !important;
+          }
+        }
+        @media (max-width: 460px) {
+          .visit-form-grid {
+            grid-template-columns: 1fr !important;
+          }
         }
       `}</style>
     </main>

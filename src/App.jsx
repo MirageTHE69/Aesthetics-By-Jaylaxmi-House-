@@ -136,7 +136,7 @@ export default function App() {
       <Footer onNavigate={handleNavigate} />
 
       {/* Floating Premium Theme Customizer (Wow Factor) */}
-      <div style={{
+      <div className="theme-widget" style={{
         position: 'fixed',
         bottom: '24px',
         right: '24px',
@@ -167,7 +167,7 @@ export default function App() {
         </button>
 
         {showThemePanel && (
-          <div style={{
+          <div className="theme-panel" style={{
             position: 'absolute',
             bottom: '60px',
             right: 0,
@@ -176,6 +176,9 @@ export default function App() {
             borderRadius: '8px',
             padding: '24px',
             width: '280px',
+            maxWidth: 'calc(100vw - 48px)',
+            maxHeight: 'calc(100vh - 120px)',
+            overflowY: 'auto',
             boxShadow: '0 10px 30px rgba(0,0,0,0.12)',
             animation: 'aes-fade 0.3s ease'
           }}>
@@ -298,6 +301,16 @@ export default function App() {
       <style>{`
         .theme-toggle-btn:hover {
           transform: scale(1.1) rotate(15deg);
+        }
+        @media (max-width: 560px) {
+          .theme-widget {
+            bottom: 16px !important;
+            right: 16px !important;
+          }
+          .theme-widget .theme-toggle-btn {
+            width: 44px !important;
+            height: 44px !important;
+          }
         }
       `}</style>
     </div>

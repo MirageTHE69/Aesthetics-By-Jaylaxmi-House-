@@ -121,7 +121,7 @@ export default function CustomizeView({ onNavigate, category, onSelectCategory }
   });
 
   return (
-    <main style={{ padding: '40px 56px 90px', minHeight: '70vh' }} className="animate-fade">
+    <main className="sec-pad animate-fade" style={{ padding: '40px 56px 90px', minHeight: '70vh' }}>
       {/* 1. FORM PHASE */}
       {phase === 'form' && (
         <div>
@@ -137,7 +137,7 @@ export default function CustomizeView({ onNavigate, category, onSelectCategory }
             </div>
             <div style={{ display: 'flex', gap: '8px' }}>
               {[1, 2, 3, 4].map(n => (
-                <span 
+                <span
                   key={n}
                   style={{
                     width: n === step ? '26px' : '14px',
@@ -151,18 +151,18 @@ export default function CustomizeView({ onNavigate, category, onSelectCategory }
           </div>
 
           {/* Form Content box */}
-          <div style={{ background: '#FCFAF6', padding: '60px 64px', border: '1px solid rgba(33,28,22,0.05)' }}>
-            
+          <div className="wizard-box" style={{ background: '#FCFAF6', padding: '60px 64px', border: '1px solid rgba(33,28,22,0.05)' }}>
+
             {/* STEP 1: Category */}
             {step === 1 && (
               <div>
-                <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '46px', lineHeight: 1, marginBottom: '8px' }}>
+                <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 46px)', lineHeight: 1.05, marginBottom: '8px' }}>
                   Choose a collection
                 </h2>
                 <p style={{ fontSize: '14.5px', color: '#6B6458', marginBottom: '38px' }}>
                   What are we designing today?
                 </p>
-                <div style={{
+                <div className="wizard-cat-grid" style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(4, 1fr)',
                   gap: '14px'
@@ -220,7 +220,7 @@ export default function CustomizeView({ onNavigate, category, onSelectCategory }
             {/* STEP 2: Style Direction & Room */}
             {step === 2 && (
               <div>
-                <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '46px', lineHeight: 1, marginBottom: '8px' }}>
+                <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 46px)', lineHeight: 1.05, marginBottom: '8px' }}>
                   Style direction
                 </h2>
                 <p style={{ fontSize: '14.5px', color: '#6B6458', marginBottom: '34px' }}>
@@ -260,7 +260,7 @@ export default function CustomizeView({ onNavigate, category, onSelectCategory }
             {/* STEP 3: Palette & Mood */}
             {step === 3 && (
               <div>
-                <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '46px', lineHeight: 1, marginBottom: '8px' }}>
+                <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 46px)', lineHeight: 1.05, marginBottom: '8px' }}>
                   Palette &amp; mood
                 </h2>
                 <p style={{ fontSize: '14.5px', color: '#6B6458', marginBottom: '34px' }}>
@@ -304,7 +304,7 @@ export default function CustomizeView({ onNavigate, category, onSelectCategory }
             {/* STEP 4: Personal Note & Summary */}
             {step === 4 && (
               <div>
-                <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '46px', lineHeight: 1, marginBottom: '8px' }}>
+                <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 46px)', lineHeight: 1.05, marginBottom: '8px' }}>
                   Add a personal note
                 </h2>
                 <p style={{ fontSize: '14.5px', color: '#6B6458', marginBottom: '30px' }}>
@@ -330,7 +330,7 @@ export default function CustomizeView({ onNavigate, category, onSelectCategory }
                   }}
                 />
 
-                <div style={{
+                <div className="wizard-summary-grid" style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(3, 1fr)',
                   gap: '30px',
@@ -404,7 +404,7 @@ export default function CustomizeView({ onNavigate, category, onSelectCategory }
 
       {/* 2. LOADING PHASE */}
       {phase === 'loading' && (
-        <div style={{
+        <div className="wizard-loading-box" style={{
           background: '#FCFAF6',
           padding: '130px 40px',
           textAlign: 'center',
@@ -433,16 +433,16 @@ export default function CustomizeView({ onNavigate, category, onSelectCategory }
 
       {/* 3. RESULTS PHASE */}
       {phase === 'results' && (
-        <div style={{ background: '#FCFAF6', padding: '60px 64px', border: '1px solid rgba(33,28,22,0.05)' }}>
+        <div className="wizard-box" style={{ background: '#FCFAF6', padding: '60px 64px', border: '1px solid rgba(33,28,22,0.05)' }}>
           <div style={{ fontSize: '11px', letterSpacing: '3px', color: 'var(--accent)', marginBottom: '14px', fontWeight: 500 }}>
             CONCEPTS READY
           </div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: '46px', lineHeight: 1, marginBottom: '36px' }}>
+          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 46px)', lineHeight: 1.05, marginBottom: '36px' }}>
             Your concepts for <em style={{ fontStyle: 'italic' }}>{category}.</em>
           </h2>
 
           {/* AI generated concepts display */}
-          <div style={{
+          <div className="wizard-results-grid" style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
             gap: '20px',
@@ -537,6 +537,34 @@ export default function CustomizeView({ onNavigate, category, onSelectCategory }
         }
         .accent-btn:hover {
           background-color: var(--accent-dark) !important;
+        }
+
+        @media (max-width: 800px) {
+          .wizard-box {
+            padding: 36px 24px !important;
+          }
+          .wizard-loading-box {
+            padding: 80px 24px !important;
+          }
+          .wizard-cat-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .wizard-summary-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 22px !important;
+          }
+          .wizard-results-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        @media (max-width: 420px) {
+          .wizard-box {
+            padding: 28px 18px !important;
+          }
+          .wizard-cat-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 10px !important;
+          }
         }
       `}</style>
     </main>

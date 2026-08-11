@@ -34,7 +34,7 @@ export default function Header({ currentView, onNavigate }) {
         onClick={() => { onNavigate('home'); setMobileMenuOpen(false); }} 
         style={{ border: 'none', background: 'none', textAlign: 'left', cursor: 'pointer', padding: 0 }}
       >
-        <div style={{
+        <div className="app-logo-title" style={{
           fontFamily: 'var(--serif)',
           fontSize: '27px',
           fontWeight: 500,
@@ -42,7 +42,7 @@ export default function Header({ currentView, onNavigate }) {
           lineHeight: 1,
           color: '#211C16'
         }}>Aesthetics</div>
-        <div style={{
+        <div className="app-logo-subtitle" style={{
           fontFamily: 'var(--sans)',
           fontSize: '9.5px',
           fontWeight: 400,
@@ -153,6 +153,17 @@ export default function Header({ currentView, onNavigate }) {
           }
           .mobile-menu-toggle {
             display: block !important;
+          }
+        }
+        @media (max-width: 380px) {
+          .app-header {
+            padding: 14px 16px !important;
+          }
+          .app-logo-title {
+            font-size: 22px !important;
+          }
+          .app-logo-subtitle {
+            letter-spacing: 2.5px !important;
           }
         }
       `}</style>

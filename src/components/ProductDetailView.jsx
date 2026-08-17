@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
-import { findProduct, getProductsByCategory } from '../data/products';
+import { findStoredProduct, getStoredProductsByCategory, addBooking } from '../data/storage';
 
 export default function ProductDetailView({ productId, onNavigate, onSelectCategory, onSelectProduct }) {
-  const product = findProduct(productId);
+  const [product, setProduct] = useState(findStoredProduct(productId));
   const [activeImage, setActiveImage] = useState(0);
   const [activeColor, setActiveColor] = useState(0);
 
+  // Booking / Sample Request Modal
+  const [showSampleModal, setShowSampleModal] = useState(false);
+  const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [form, setForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    city: 'Vadodara',
+    message: ''
+  });
+
   useEffect(() => {
+    const p = findStoredProduct(productId);
+    setProduct(p);
     setActiveImage(0);
     setActiveColor(0);
+    setBookingSuccess(false);
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [productId]);
 
@@ -28,7 +42,7 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
     );
   }
 
-  const related = getProductsByCategory(product.category).filter(p => p.id !== product.id).slice(0, 3);
+  const related = getStoredProductsByCategory(product.category).filter(p => p.id !== product.id).slice(0, 3);
 
   const handleSelectRelated = (id) => {
     onSelectProduct(id);
@@ -39,6 +53,31 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
     onSelectCategory(product.category);
     onNavigate('customize');
   };
+
+  const handleSubmitSampleBooking = (e) => {
+    e.preventDefault();
+    if (!form.name || !form.phone) return;
+
+    addBooking({
+      name: form.name,
+      phone: form.phone,
+      email: form.email,
+      city: form.city,
+      serviceType: 'Product Sample / Consultation',
+      category: product.category,
+      productName: product.name,
+      message: `Requested for ${product.name} (₹${product.price} ${product.unit}). Shade: ${product.colors && product.colors[activeColor] ? product.colors[activeColor].name : 'Default'}. Notes: ${form.message}`
+    });
+
+    setBookingSuccess(true);
+    setTimeout(() => {
+      setShowSampleModal(false);
+      setBookingSuccess(false);
+      setForm({ name: '', phone: '', email: '', city: 'Vadodara', message: '' });
+    }, 2500);
+  };
+
+  const whatsappMessage = encodeURIComponent(`Hello Aesthetics, I am interested in ${product.name} (${product.category}) priced at ₹${product.price} ${product.unit}. Can you please share more swatches and schedule a consultation?`);
 
   return (
     <main className="animate-fade">
@@ -52,7 +91,7 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
           style={crumbStyle}
         >{product.category.toUpperCase()}</button>
         <span style={{ color: '#C7BEB0', fontSize: '11px' }}>/</span>
-        <span style={{ fontSize: '11px', letterSpacing: '2px', color: '#3A342B', fontWeight: 500 }}>{product.name.toUpperCase()}</span>
+        <span style={{ fontSize: '11px', letterSpacing: '2px', color: '#3A342B', fontWeight: 600 }}>{product.name.toUpperCase()}</span>
       </div>
 
       {/* Main product section */}
@@ -65,14 +104,30 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
       }}>
         {/* Gallery */}
         <div key={productId} style={{ animation: 'aes-fade 0.4s ease both' }}>
-          <div className="product-main-img" style={{ aspectRatio: '4/3.6', overflow: 'hidden', background: '#BFB7AA', marginBottom: '14px' }}>
+          <div className="product-main-img" style={{ aspectRatio: '4/3.6', overflow: 'hidden', background: '#BFB7AA', marginBottom: '14px', position: 'relative' }}>
             <img
-              src={product.images[activeImage]}
+              src={product.images && product.images[activeImage] ? product.images[activeImage] : 'https://images.unsplash.com/photo-1691036561573-4b76998b60de?w=1600&q=80'}
               alt={product.name}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
+            {product.badge && (
+              <span style={{
+                position: 'absolute',
+                top: '16px',
+                left: '16px',
+                background: 'rgba(33,28,22,0.85)',
+                color: '#fff',
+                fontSize: '10px',
+                letterSpacing: '2px',
+                padding: '5px 12px',
+                fontWeight: 600
+              }}>
+                {product.badge.toUpperCase()}
+              </span>
+            )}
           </div>
-          {product.images.length > 1 && (
+
+          {product.images && product.images.length > 1 && (
             <div style={{ display: 'flex', gap: '12px' }}>
               {product.images.map((img, i) => (
                 <button
@@ -98,82 +153,107 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
           )}
         </div>
 
-        {/* Info */}
+        {/* Info Column */}
         <div>
-          <div style={{ fontSize: '11px', letterSpacing: '3px', color: 'var(--accent)', marginBottom: '16px', fontWeight: 500 }}>
-            {product.category.toUpperCase()}
+          <div style={{ fontSize: '11px', letterSpacing: '3px', color: 'var(--accent)', marginBottom: '14px', fontWeight: 600 }}>
+            {product.category.toUpperCase()} {product.curtainType ? `· ${product.curtainType.toUpperCase()}` : ''}
           </div>
           <h1 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 48px)', lineHeight: 1.05, marginBottom: '18px' }}>
             {product.name}
           </h1>
-          <div style={{ fontFamily: 'ui-monospace, monospace', fontSize: '17px', color: '#3A342B', marginBottom: '28px' }}>
-            ₹{product.price.toLocaleString('en-IN')} <span style={{ color: '#8B8272', fontSize: '13px' }}>{product.unit}</span>
+          <div style={{ fontFamily: 'ui-monospace, monospace', fontSize: '20px', color: '#211C16', marginBottom: '24px', fontWeight: 600 }}>
+            ₹{Number(product.price).toLocaleString('en-IN')} <span style={{ color: '#8B8272', fontSize: '13px', fontWeight: 400 }}>{product.unit}</span>
           </div>
-          <p style={{ fontSize: '15.5px', lineHeight: 1.85, color: '#5C554A', maxWidth: '460px', marginBottom: '34px' }}>
+          <p style={{ fontSize: '15.5px', lineHeight: 1.85, color: '#5C554A', maxWidth: '480px', marginBottom: '34px' }}>
             {product.description}
           </p>
 
           {/* Colors */}
-          <div style={{ marginBottom: '34px' }}>
-            <div style={{ fontSize: '10.5px', letterSpacing: '2.5px', color: '#8B8272', marginBottom: '14px', fontWeight: 500 }}>
-              COLOURWAY — {product.colors[activeColor].name.toUpperCase()}
+          {product.colors && product.colors.length > 0 && (
+            <div style={{ marginBottom: '34px' }}>
+              <div style={{ fontSize: '10.5px', letterSpacing: '2.5px', color: '#8B8272', marginBottom: '14px', fontWeight: 600 }}>
+                COLOURWAY — {(product.colors[activeColor] || product.colors[0]).name.toUpperCase()}
+              </div>
+              <div style={{ display: 'flex', gap: '12px' }}>
+                {product.colors.map((c, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setActiveColor(i)}
+                    title={c.name}
+                    style={{
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '50%',
+                      background: c.hex,
+                      border: activeColor === i ? '2px solid var(--text)' : '1px solid rgba(33,28,22,0.15)',
+                      cursor: 'pointer',
+                      transform: activeColor === i ? 'scale(1.15)' : 'none',
+                      transition: 'transform 0.2s ease'
+                    }}
+                  />
+                ))}
+              </div>
             </div>
-            <div style={{ display: 'flex', gap: '12px' }}>
-              {product.colors.map((c, i) => (
-                <button
-                  key={c.name}
-                  type="button"
-                  onClick={() => setActiveColor(i)}
-                  title={c.name}
-                  style={{
-                    width: '30px',
-                    height: '30px',
-                    borderRadius: '50%',
-                    background: c.hex,
-                    border: activeColor === i ? '2px solid var(--text)' : '1px solid rgba(33,28,22,0.15)',
-                    cursor: 'pointer',
-                    transform: activeColor === i ? 'scale(1.12)' : 'none',
-                    transition: 'transform 0.2s ease'
-                  }}
-                />
-              ))}
-            </div>
-          </div>
+          )}
 
           {/* Specs */}
-          <div className="product-specs" style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '18px 24px',
-            borderTop: '1px solid #E7E0D4',
-            paddingTop: '26px',
-            marginBottom: '36px'
-          }}>
-            {Object.entries(product.specs).map(([label, value]) => (
-              <div key={label}>
-                <div style={{ fontSize: '10px', letterSpacing: '2px', color: '#8B8272', marginBottom: '7px', fontWeight: 500 }}>{label.toUpperCase()}</div>
-                <div style={{ fontFamily: 'var(--serif)', fontSize: '17px', color: '#211C16', lineHeight: 1.3 }}>{value}</div>
-              </div>
-            ))}
-          </div>
+          {product.specs && Object.keys(product.specs).length > 0 && (
+            <div className="product-specs" style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '18px 24px',
+              borderTop: '1px solid #E7E0D4',
+              paddingTop: '26px',
+              marginBottom: '36px'
+            }}>
+              {Object.entries(product.specs).map(([label, value]) => (
+                <div key={label}>
+                  <div style={{ fontSize: '10px', letterSpacing: '2px', color: '#8B8272', marginBottom: '6px', fontWeight: 600 }}>{label.toUpperCase()}</div>
+                  <div style={{ fontFamily: 'var(--serif)', fontSize: '17px', color: '#211C16', lineHeight: 1.3 }}>{value}</div>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* CTAs */}
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', alignItems: 'center' }}>
             <button
               type="button"
-              onClick={() => onNavigate('visit')}
-              style={{ border: 'none', background: 'var(--accent)', color: '#fff', cursor: 'pointer', padding: '17px 32px', fontFamily: 'var(--sans)', fontSize: '11px', letterSpacing: '3px', fontWeight: 500, transition: 'background-color 0.2s ease' }}
+              onClick={() => setShowSampleModal(true)}
+              style={{ border: 'none', background: 'var(--accent)', color: '#fff', cursor: 'pointer', padding: '17px 32px', fontFamily: 'var(--sans)', fontSize: '11px', letterSpacing: '3px', fontWeight: 600, transition: 'background-color 0.2s ease' }}
               className="accent-btn"
             >
-              REQUEST A SAMPLE
+              REQUEST SAMPLE / VISIT
             </button>
+            <a
+              href={`https://wa.me/919913132736?text=${whatsappMessage}`}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                border: '1px solid #25D366',
+                background: '#25D366',
+                color: '#fff',
+                textDecoration: 'none',
+                padding: '16px 24px',
+                fontFamily: 'var(--sans)',
+                fontSize: '11px',
+                letterSpacing: '2px',
+                fontWeight: 600,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              💬 WHATSAPP SALES
+            </a>
             <button
               type="button"
               onClick={handleDesignWithAI}
-              style={{ border: '1px solid #3A342B', background: 'none', color: '#3A342B', cursor: 'pointer', padding: '16px 32px', fontFamily: 'var(--sans)', fontSize: '11px', letterSpacing: '3px', fontWeight: 500, transition: 'all 0.2s ease' }}
+              style={{ border: '1px solid #3A342B', background: 'none', color: '#3A342B', cursor: 'pointer', padding: '16px 28px', fontFamily: 'var(--sans)', fontSize: '11px', letterSpacing: '2.5px', fontWeight: 500 }}
               className="outline-btn"
             >
-              ✦ CUSTOMIZE WITH AI
+              ✦ DESIGN WITH AI
             </button>
           </div>
         </div>
@@ -183,7 +263,7 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
       {related.length > 0 && (
         <section className="sec-pad" style={{ padding: '0 56px 110px', borderTop: '1px solid rgba(33,28,22,0.08)' }}>
           <div style={{ padding: '64px 0 40px' }}>
-            <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '16px', fontWeight: 500 }}>MORE FROM {product.category.toUpperCase()}</div>
+            <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '16px', fontWeight: 600 }}>MORE FROM {product.category.toUpperCase()}</div>
             <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(26px, 5vw, 38px)', lineHeight: 1.05 }}>
               You may also <em style={{ fontStyle: 'italic' }}>like.</em>
             </h2>
@@ -194,6 +274,147 @@ export default function ProductDetailView({ productId, onNavigate, onSelectCateg
             ))}
           </div>
         </section>
+      )}
+
+      {/* Sample / Consultation Booking Modal */}
+      {showSampleModal && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0,0,0,0.6)',
+          backdropFilter: 'blur(4px)',
+          zIndex: 1000,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '24px'
+        }}>
+          <div style={{
+            background: '#FFFFFF',
+            width: '100%',
+            maxWidth: '540px',
+            padding: '36px',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
+            position: 'relative'
+          }}>
+            <button
+              type="button"
+              onClick={() => setShowSampleModal(false)}
+              style={{ position: 'absolute', top: '20px', right: '20px', background: 'none', border: 'none', fontSize: '22px', cursor: 'pointer', color: '#888' }}
+            >
+              ✕
+            </button>
+
+            {bookingSuccess ? (
+              <div style={{ textAlign: 'center', padding: '30px 10px' }}>
+                <div style={{ fontSize: '42px', marginBottom: '14px' }}>✓</div>
+                <h3 style={{ fontFamily: 'var(--serif)', fontSize: '28px', marginBottom: '10px' }}>Inquiry Received</h3>
+                <p style={{ fontSize: '15px', color: '#666', lineHeight: 1.6 }}>
+                  Thank you, <strong>{form.name}</strong>. Our Vadodara design consultant will call you at <strong>{form.phone}</strong> regarding <em>{product.name}</em> swatches and measurements.
+                </p>
+              </div>
+            ) : (
+              <div>
+                <div style={{ fontSize: '10.5px', letterSpacing: '2.5px', color: 'var(--accent)', marginBottom: '8px', fontWeight: 600 }}>
+                  STUDIO CONSULTATION &amp; SWATCHES
+                </div>
+                <h3 style={{ fontFamily: 'var(--serif)', fontSize: '28px', fontWeight: 500, margin: '0 0 18px' }}>
+                  Request Sample for {product.name}
+                </h3>
+                <p style={{ fontSize: '13.5px', color: '#6A6357', margin: '0 0 24px', lineHeight: 1.6 }}>
+                  Leave your details and our senior decorator will contact you with free fabric swatches or arrange a site measurement visit.
+                </p>
+
+                <form onSubmit={handleSubmitSampleBooking} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '11px', letterSpacing: '1.5px', color: '#666', fontWeight: 600, marginBottom: '4px' }}>
+                      FULL NAME *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      placeholder="e.g. Anand Patel"
+                      style={{ width: '100%', padding: '10px 12px', border: '1px solid #CCC', fontSize: '14px' }}
+                    />
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '11px', letterSpacing: '1.5px', color: '#666', fontWeight: 600, marginBottom: '4px' }}>
+                        PHONE NUMBER *
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        placeholder="+91 98..."
+                        style={{ width: '100%', padding: '10px 12px', border: '1px solid #CCC', fontSize: '14px' }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '11px', letterSpacing: '1.5px', color: '#666', fontWeight: 600, marginBottom: '4px' }}>
+                        CITY / LOCALITY
+                      </label>
+                      <input
+                        type="text"
+                        value={form.city}
+                        onChange={(e) => setForm({ ...form, city: e.target.value })}
+                        placeholder="Vadodara, Alkapuri..."
+                        style={{ width: '100%', padding: '10px 12px', border: '1px solid #CCC', fontSize: '14px' }}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '11px', letterSpacing: '1.5px', color: '#666', fontWeight: 600, marginBottom: '4px' }}>
+                      EMAIL (OPTIONAL)
+                    </label>
+                    <input
+                      type="email"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      placeholder="name@domain.com"
+                      style={{ width: '100%', padding: '10px 12px', border: '1px solid #CCC', fontSize: '14px' }}
+                    />
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '11px', letterSpacing: '1.5px', color: '#666', fontWeight: 600, marginBottom: '4px' }}>
+                      SPECIAL REQUIREMENTS / WINDOW DIMENSIONS
+                    </label>
+                    <textarea
+                      rows="3"
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      placeholder="Room type, drop length, preferred visit time..."
+                      style={{ width: '100%', padding: '10px 12px', border: '1px solid #CCC', fontSize: '14px', resize: 'none' }}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    style={{
+                      background: 'var(--accent)',
+                      color: '#fff',
+                      border: 'none',
+                      padding: '14px',
+                      fontSize: '11px',
+                      letterSpacing: '2.5px',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      marginTop: '8px'
+                    }}
+                  >
+                    SUBMIT INQUIRY
+                  </button>
+                </form>
+              </div>
+            )}
+          </div>
+        </div>
       )}
 
       <style>{`

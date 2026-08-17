@@ -1,6 +1,3 @@
-import aiChair from '../assets/ai-chair.jpg';
-import aiKitchen from '../assets/ai-kitchen.jpg';
-import aiShelves from '../assets/ai-shelves.jpg';
 import heroLiving from '../assets/hero-living.jpg';
 import atelierDetail from '../assets/atelier-detail.png';
 import atelierWide from '../assets/atelier-wide.png';
@@ -13,6 +10,7 @@ import patternHerringbone from '../assets/pattern-herringbone.png';
 import patternSolid from '../assets/pattern-solid.png';
 import patternStripe from '../assets/pattern-stripe.png';
 
+// High-resolution curated editorial imagery for all 9 categories
 const U1 = 'https://images.unsplash.com/photo-1691036561573-4b76998b60de?w=1600&q=80';
 const U2 = 'https://images.unsplash.com/photo-1544691560-fc2053d97726?w=1600&q=80';
 const U3 = 'https://images.unsplash.com/photo-1558882224-dda166733046?w=1600&q=80';
@@ -24,417 +22,568 @@ const U8 = 'https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=1600&
 const U9 = 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=1600&q=80';
 const U10 = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80';
 const U11 = 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&q=80';
+const U12 = 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=1600&q=80';
 const U13 = 'https://images.unsplash.com/photo-1528458909336-e7a0adfed0a5?w=1600&q=80';
+const U14 = 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1600&q=80';
+const U15 = 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1600&q=80';
 
+// EXACT 9 PRODUCT CATEGORIES
 export const CATEGORIES = [
   'Curtains',
   'Upholstery Fabrics',
-  'Wallpapers',
   'Blinds',
-  'Wooden Flooring',
-  'Home Linen',
-  'Mattresses',
-  'Rugs & Carpets'
+  'Custom Furniture',
+  'Wall Coverings',
+  'Flooring',
+  'Home Linens',
+  'Carpets & Rugs',
+  'Mattresses'
 ];
+
+export const CATEGORY_TAXONOMY = {
+  'Curtains': {
+    types: ['Sheer Curtains', 'Dimout Curtains', 'Blackout Curtains', 'Translucent Curtains'],
+    fabrics: ['Cotton', 'Linen', 'Polyester', 'Vegan Leather', 'Viscose', 'Multi-Blends']
+  },
+  'Upholstery Fabrics': {
+    types: ['Heavy Upholstery', 'Accent Fabrics', 'Banquette & Chair Weaves', 'Outdoor & Performance'],
+    fabrics: ['Cotton', 'Linen', 'Polyester', 'Viscose', 'Multi-Blends']
+  },
+  'Blinds': {
+    types: ['Roman Blinds', 'Roller Blinds', 'Venetian Blinds', 'Bamboo & Wooden Blinds', 'Motorized Blinds'],
+    fabrics: ['Raw Cotton', 'Linen Voile', 'Polyester Mesh', 'Natural Bamboo', 'Basswood']
+  },
+  'Custom Furniture': {
+    types: ['Bespoke Sofas', 'Accent Armchairs', 'Dining Seating', 'Bespoke Headboards', 'Consoles & Low Tables'],
+    fabrics: ['Full Grain Leather', 'Handloom Bouclé', 'Velvet', 'Cotton-Linen Weave']
+  },
+  'Wall Coverings': {
+    types: ['Wallpapers', 'Fabric Panelling', 'Veneer Wallpapers'],
+    fabrics: ['Non-Woven Paper', 'Acoustic Linen Panelling', 'Natural Wood Veneer', 'Textured Grasscloth']
+  },
+  'Flooring': {
+    types: ['Laminate Wooden Flooring', 'Engineered Wood Flooring', 'PVC Flooring', 'SPC Flooring', 'Wall-to-Wall Carpets'],
+    fabrics: ['European Oak', 'American Walnut', 'Teak Wood', 'Heavy SPC Polymer', 'Wool Blend']
+  },
+  'Home Linens': {
+    types: ['Bedroom Sets', 'Bath Linens', 'Decorative Cushions', 'Cushion Covers'],
+    fabrics: ['Cotton Percale 300TC', 'Mulberry Silk', 'Pure Belgian Linen', 'Hand Block Printed Cotton']
+  },
+  'Carpets & Rugs': {
+    types: ['Handmade Rugs', 'Customized Rugs', 'Carpets'],
+    fabrics: ['Hand-Spun Wool', 'Pit-Loomed Cotton', 'Jute Blends', 'Silk-Touch Persian Weaves']
+  },
+  'Mattresses': {
+    types: ['Memory Foam', 'Natural Latex', 'Hybrid Pocket Spring', 'Orthopedic Coir', 'Custom-Sized Sleep Systems'],
+    fabrics: ['Organic Cotton Quilted', 'Natural Latex Core', 'Rubberised Coir', 'High Resilient Foam']
+  }
+};
 
 export const CATEGORY_META = {
   'Curtains': {
     eyebrow: 'MADE-TO-MEASURE DRAPERY',
     heading: 'Light, framed by hand.',
-    description: 'Sheers, blackouts and heavy drapes — engineered to the exact drop and width of your window, then hand-finished in our Vadodara workshop.',
+    description: 'Sheer, Dimout, Blackout & Translucent curtains in pure cotton, linen, viscose, vegan leather, and bespoke multi-blends — tailored to the drop of your window in Vadodara.',
     hero: U1,
-    studioCount: 42
+    studioCount: 42,
+    subtypes: ['Sheer Curtains', 'Dimout Curtains', 'Blackout Curtains', 'Translucent Curtains']
   },
   'Upholstery Fabrics': {
     eyebrow: 'SOFAS, CHAIRS & BANQUETTES',
     heading: 'Fabric that earns a decade of use.',
-    description: 'Heavy-duty weaves built for daily life — bouclé, herringbone and cotton-blends rated for high-traffic upholstery, sold by the metre or fully railroaded.',
+    description: 'Heavy-duty weaves engineered for everyday living — cotton, linen, polyester, viscose, and multi-blends tested up to 75,000 Martindale rubs.',
     hero: U2,
-    studioCount: 68
-  },
-  'Wallpapers': {
-    eyebrow: 'WALLS & FEATURE PANELS',
-    heading: 'Pattern, considered quietly.',
-    description: 'Hand-block prints, ikat-inspired grids and textured linen-looks, printed to order and trimmed on-site by our installation team.',
-    hero: U3,
-    studioCount: 120
+    studioCount: 68,
+    subtypes: ['Cotton', 'Linen', 'Polyester', 'Viscose', 'Multi-Blends']
   },
   'Blinds': {
     eyebrow: 'ROMAN, ROLLER & VENETIAN',
-    heading: 'Light control, tailored.',
-    description: 'Roman, bamboo, sheer roller and slatted linen blinds — every mechanism measured and fitted for your exact window recess.',
+    heading: 'Light control, tailored quietly.',
+    description: 'Roman, roller, venetian, natural bamboo, and smart motorized blinds — custom engineered for exact window recess fit and smooth operation.',
     hero: U4,
-    studioCount: 24
+    studioCount: 24,
+    subtypes: ['Roman Blinds', 'Roller Blinds', 'Venetian Blinds', 'Bamboo & Wooden', 'Motorized']
   },
-  'Wooden Flooring': {
-    eyebrow: 'ENGINEERED & SOLID WOOD',
-    heading: 'The ground, warmed.',
-    description: 'Oak, walnut and teak in plank and herringbone lay, finished matte or oiled and installed by our own flooring crew.',
+  'Custom Furniture': {
+    eyebrow: 'BESPOKE HANDMADE PIECES',
+    heading: 'Timeless furniture, tailored to your space.',
+    description: 'Custom sofas, reading armchairs, tailored dining chairs, and bespoke headboards built in solid seasoned teak wood and upholstered in our atelier fabrics.',
+    hero: U14,
+    studioCount: 28,
+    subtypes: ['Bespoke Sofas', 'Accent Armchairs', 'Dining Seating', 'Headboards', 'Consoles']
+  },
+  'Wall Coverings': {
+    eyebrow: 'WALLPAPERS, PANELLING & VENEERS',
+    heading: 'Walls that speak with quiet elegance.',
+    description: 'Curated wallpapers, architectural fabric panelling, and natural veneer wall coverings from global design houses and Indian heritage ateliers.',
+    hero: U3,
+    studioCount: 120,
+    subtypes: ['Wallpapers', 'Fabric Panelling', 'Veneer Wallpapers']
+  },
+  'Flooring': {
+    eyebrow: 'WOODEN, SPC & CARPET SOLUTIONS',
+    heading: 'Underfoot warmth & enduring durability.',
+    description: 'Laminate wooden flooring, engineered wood, PVC, heavy-duty SPC flooring, and wall-to-wall carpets professionally installed by our specialist crew.',
     hero: U5,
-    studioCount: 18
+    studioCount: 32,
+    subtypes: ['Laminate Flooring', 'Engineered Wood', 'PVC Flooring', 'SPC Flooring', 'Wall-to-Wall Carpets']
   },
-  'Home Linen': {
-    eyebrow: 'BEDDING, THROWS & CUSHIONS',
-    heading: 'What the bed remembers.',
-    description: 'Cotton percale, mulberry silk and hand block-printed linen sets, cut and stitched in-house for a considered bedroom.',
+  'Home Linens': {
+    eyebrow: 'BEDDING, BATH & CUSHIONS',
+    heading: 'What the home remembers.',
+    description: 'Pure 300TC cotton percale bedroom sets, absorbent luxury bath linens, hand block-printed cushion covers, and decorative throws crafted in-house.',
     hero: U6,
-    studioCount: 36
+    studioCount: 46,
+    subtypes: ['Bedroom Sets', 'Bath Linens', 'Decorative Cushions', 'Cushion Covers']
+  },
+  'Carpets & Rugs': {
+    eyebrow: 'HANDMADE & CUSTOMIZED RUGS',
+    heading: 'Underfoot, pure storytelling.',
+    description: 'Handmade wool rugs, customized rugs tailored to your room dimensions, and luxury carpets hand-knotted by traditional weaving families.',
+    hero: U8,
+    studioCount: 54,
+    subtypes: ['Handmade Rugs', 'Customized Rugs', 'Carpets']
   },
   'Mattresses': {
-    eyebrow: 'SLEEP SYSTEMS',
+    eyebrow: 'ENGINEERED SLEEP SYSTEMS',
     heading: 'Rest, engineered quietly.',
-    description: 'Cotton, coir, latex and pocket-spring builds finished with natural fibre quilting — made to size, including non-standard Indian bed dimensions.',
+    description: 'Natural latex, memory foam, orthopedic coir, and hybrid pocket spring sleep systems — custom crafted to standard and non-standard Indian bed sizes.',
     hero: U7,
-    studioCount: 12
-  },
-  'Rugs & Carpets': {
-    eyebrow: 'HANDWOVEN FLOOR TEXTILES',
-    heading: 'Underfoot, storytelling.',
-    description: 'Dhurries, wool rugs and jute blends, hand-knotted or flat-woven by weaving families in Bhujodi and Kutch.',
-    hero: U8,
-    studioCount: 54
+    studioCount: 16,
+    subtypes: ['Memory Foam', 'Natural Latex', 'Hybrid Pocket Spring', 'Orthopedic Coir']
   }
 };
 
+// 32 OFFICIAL BRANDS WE CARRY
+export const BRANDS_WE_CARRY = [
+  { name: 'Asian paints Nilaya + Sabyasachi', category: 'Wall Coverings & Fabrics', tag: 'Luxury Designer' },
+  { name: 'Ddecor', category: 'Curtains & Upholstery', tag: 'Premium Textiles' },
+  { name: 'Sansaar by Ddecor', category: 'Sustainable Fabrics', tag: 'Eco Luxe' },
+  { name: 'Sarom', category: 'Curtains & Upholstery', tag: 'Fine Furnishings' },
+  { name: 'Vaya', category: 'Luxury Silks & Weaves', tag: 'High Craft' },
+  { name: 'F&F', category: 'Drapery & Sheers', tag: 'Curated Fabrics' },
+  { name: 'Nu Home décor', category: 'Home Linens & Soft Furnishings', tag: 'Modern Living' },
+  { name: 'V&J furnishings', category: 'Velvets & Textures', tag: 'Bespoke' },
+  { name: 'Warwick', category: 'Performance Upholstery', tag: 'Global Standards' },
+  { name: 'Rumors', category: 'Contemporary Prints', tag: 'Design Forward' },
+  { name: 'GM homes', category: 'Soft Furnishings', tag: 'Everyday Luxury' },
+  { name: 'Li Dimora', category: 'Italian Inspired Drapery', tag: 'Artisanal' },
+  { name: 'Maspar', category: 'Luxury Bedding & Linens', tag: 'Pure Cotton' },
+  { name: 'Monte carlo', category: 'Throws & Blankets', tag: 'Warm Comfort' },
+  { name: 'Pluchi', category: 'Knitted Cushions & Throws', tag: 'Nordic Craft' },
+  { name: 'Sadyaska', category: 'Bespoke Linens', tag: 'Heritage' },
+  { name: 'Labham', category: 'Curtains & Drapes', tag: 'Classic' },
+  { name: 'Welspun / Spaces', category: 'Bedding & Bath Linens', tag: 'Premium Home' },
+  { name: 'Trident', category: 'Luxury Bath Towels', tag: 'Pure Absorbency' },
+  { name: 'Himeya', category: 'Organic Bedding', tag: 'Sustainable' },
+  { name: 'La Casa', category: 'Curtain Hardware & Textures', tag: 'Modern' },
+  { name: 'Aplito', category: 'Architectural Wallpapers', tag: 'Textures' },
+  { name: 'Obsessions', category: 'Bath Mats & Decorative Rugs', tag: 'Contemporary' },
+  { name: 'Excel Wall coverings', category: 'Wallpapers & Panelling', tag: 'Global Collection' },
+  { name: 'Divine carpets', category: 'Handmade Rugs & Carpets', tag: 'Handloom' },
+  { name: 'Jaipur Rugs', category: 'Artisan Knotted Carpets', tag: 'Master Weavers' },
+  { name: 'Adorn Blinds', category: 'Motorized & Roller Blinds', tag: 'Precision' },
+  { name: 'NBT', category: 'Specialized Blinds', tag: 'Commercial' },
+  { name: 'MAC Blinds', category: 'Architectural Window Solutions', tag: 'Engineered' },
+  { name: 'Vision Blinds', category: 'Day & Night Blinds', tag: 'Light Control' },
+  { name: 'King Koil Mattresses', category: 'Orthopedic Sleep Systems', tag: 'Global Leader' },
+  { name: 'Millbrook Beds', category: 'Handmade British Mattresses', tag: 'Luxury Sleep' },
+  { name: 'Buoninfante Mattresses', category: 'Italian Ergonomic Mattresses', tag: 'Made in Italy' }
+];
+
+// 14 COMMERCIAL & INSTITUTIONAL BRANDS THAT HAVE TRUSTED US
+export const TRUSTED_CLIENTS = [
+  { name: 'TATA Projects', type: 'Corporate & Infrastructure', icon: '🏛️' },
+  { name: 'Marriott Group', type: 'Luxury Hospitality', icon: '🏨' },
+  { name: 'ITC Hotels', type: '5-Star Luxury Hotels', icon: '🌟' },
+  { name: 'Inox CVA', type: 'Industrial & Headquarters', icon: '🏢' },
+  { name: 'BANCO', type: 'Manufacturing & Commercial', icon: '🏭' },
+  { name: 'Cube Constructions', type: 'Premium Real Estate', icon: '🏗️' },
+  { name: 'Gujarat Kidney Hospital', type: 'Healthcare Facility', icon: '🏥' },
+  { name: 'KPGU', type: 'University Campus', icon: '🎓' },
+  { name: 'Parul University', type: 'Educational Institutions', icon: '🏫' },
+  { name: 'Sumandeep Vidyapeeth', type: 'Medical & Healthcare Campus', icon: '🏛️' },
+  { name: 'Navrachana International School', type: 'Premier International School', icon: '📚' },
+  { name: 'Bhailal Amin General Hospital', type: 'Multi-Specialty Hospital', icon: '🏥' },
+  { name: 'Loksatta News', type: 'Media & Broadcasting House', icon: '📰' },
+  { name: 'Regenta Hotels', type: 'Hospitality Chain', icon: '🏨' },
+  { name: 'Hotel Hilton', type: 'Global Luxury Hospitality', icon: '✨' }
+];
+
+// OFFICIAL CONTACT DETAILS
+export const CONTACT_DETAILS = {
+  address: 'Race Course Circle, Alkapuri, Vadodara, Gujarat 390007',
+  googleMapsUrl: 'https://maps.google.com/?q=Aesthetics+Jaylaxmi+House+Race+Course+Circle+Vadodara',
+  email: 'Aesthetics.jhv@gmail.com',
+  salesPhone: '+91 9913132736',
+  salesPhoneRaw: '+919913132736',
+  generalQueriesPhone: '+91 9998852736',
+  generalQueriesPhoneRaw: '+919998852736',
+  partnerWithUsPhone: '+91 9725116871',
+  partnerWithUsPhoneRaw: '+919725116871'
+};
+
+// COMPREHENSIVE INITIAL PRODUCTS CATALOG FOR ALL 9 CATEGORIES
 export const PRODUCTS = {
   'Curtains': [
     {
       id: 'curtains-kharif-sheer',
-      name: 'Kharif Sheer',
+      name: 'Kharif Slub Sheer',
+      curtainType: 'Sheer Curtains',
+      fabricType: 'Cotton',
       price: 3400,
       unit: 'per metre',
-      description: 'A raw slub-cotton sheer that softens midday light without dimming a room. Named for the kharif harvest season, it hangs with a natural, unlined drop.',
-      colors: [{ name: 'Kharif Sand', hex: '#D9C6A5' }, { name: 'Chalk', hex: '#EFE9DD' }],
+      badge: 'Best Seller',
+      description: 'A raw slub-cotton sheer that softens midday glare without darkening your room. Finished with a natural unlined drop in our Vadodara studio.',
+      colors: [{ name: 'Kharif Sand', hex: '#D9C6A5' }, { name: 'Chalk White', hex: '#EFE9DD' }],
       images: [U1, patternSolid],
-      specs: { Composition: '100% slub cotton', Width: '140 cm, unlined', Finish: 'Soft matte, natural drape', Care: 'Gentle machine wash, line dry' }
+      specs: { CurtainType: 'Sheer Curtains', Fabric: '100% Slub Cotton', Drop: 'Made to measure up to 14 ft', Care: 'Gentle machine wash or dry clean' }
     },
     {
-      id: 'curtains-neem-shadow',
-      name: 'Neem Shadow',
+      id: 'curtains-neem-dimout',
+      name: 'Neem Shadow Dimout Drape',
+      curtainType: 'Dimout Curtains',
+      fabricType: 'Linen',
+      price: 4600,
+      unit: 'per metre',
+      badge: 'Hand Finished',
+      description: 'A medium-heavy linen blend designed to filter 80% of outdoor light with a calm, tactile presence. Ideal for bedrooms and TV lounges.',
+      colors: [{ name: 'Neem Green', hex: '#33443A' }, { name: 'Earthy Charcoal', hex: '#2B2622' }],
+      images: [mittiCurtains, atelierDetail],
+      specs: { CurtainType: 'Dimout Curtains', Fabric: '75% Natural Linen, 25% Cotton', LightDimming: '80% Light Reduction', Care: 'Dry clean recommended' }
+    },
+    {
+      id: 'curtains-nightfall-blackout',
+      name: 'Indigo Nightfall Triple-Weave Blackout',
+      curtainType: 'Blackout Curtains',
+      fabricType: 'Polyester',
       price: 5200,
       unit: 'per metre',
-      description: 'A heavyweight blackout-lined drape in a deep forest tone, cut for bedrooms and screening rooms that need true dark. Cotton face, triple-woven lining.',
-      colors: [{ name: 'Neem', hex: '#33443A' }, { name: 'Iron Ink', hex: '#2B2622' }],
-      images: [mittiCurtains, atelierDetail],
-      specs: { Composition: '82% cotton, 18% blackout lining', Width: '140 cm, fully lined', Finish: 'Matte, 100% light block', Care: 'Dry clean only' }
+      badge: '100% Light Block',
+      description: 'Triple-woven thermal blackout drapery with deep indigo dye tones. Provides sound dampening and complete bedroom darkness.',
+      colors: [{ name: 'Indigo Navy', hex: '#25303F' }, { name: 'Iron Black', hex: '#1C1A19' }],
+      images: [heroLiving, patternSolid],
+      specs: { CurtainType: 'Blackout Curtains', Fabric: 'High-Density Micro-Polyester Blend', ThermalLining: 'Triple Layer Integrated', Care: 'Dry clean only' }
     },
     {
-      id: 'curtains-ochre-horizon',
-      name: 'Ochre Horizon',
+      id: 'curtains-translucent-ochre',
+      name: 'Ochre Horizon Translucent Drape',
+      curtainType: 'Translucent Curtains',
+      fabricType: 'Viscose',
       price: 4100,
       unit: 'per metre',
-      description: 'Sun-washed ochre linen with a visible slub, woven to catch and hold late-afternoon light. Pairs naturally with our Mitti upholstery range.',
-      colors: [{ name: 'Ochre', hex: '#B4832E' }, { name: 'Terracotta', hex: '#B4592F' }],
+      badge: 'Editorial Choice',
+      description: 'A luminous viscose-linen translucent fabric that catches golden afternoon sun and fills the space with an amber glow.',
+      colors: [{ name: 'Ochre Glow', hex: '#B4832E' }, { name: 'Terracotta', hex: '#B4592F' }],
       images: [U11, patternStripe],
-      specs: { Composition: '70% linen, 30% cotton', Width: '140 cm, unlined', Finish: 'Textured slub weave', Care: 'Dry clean recommended' }
-    },
-    {
-      id: 'curtains-indigo-nightfall',
-      name: 'Indigo Nightfall',
-      price: 4800,
-      unit: 'per metre',
-      description: 'A room-darkening cotton twill in natural indigo dye, deepest at the fold. A quiet, architectural drape for studies and reading corners.',
-      colors: [{ name: 'Indigo', hex: '#41567F' }, { name: 'Ink Navy', hex: '#25303F' }],
-      images: [heroLiving, patternSolid],
-      specs: { Composition: '100% cotton twill', Width: '140 cm, mid-weight lining', Finish: 'Natural indigo dye wash', Care: 'Dry clean only' }
+      specs: { CurtainType: 'Translucent Curtains', Fabric: '60% Viscose, 40% Linen', Drape: 'Fluid, high sheen', Care: 'Professional dry clean' }
     }
   ],
   'Upholstery Fabrics': [
     {
       id: 'upholstery-mitti-boucle',
-      name: 'Mitti Bouclé',
+      name: 'Mitti Handloom Bouclé',
+      curtainType: 'Heavy Upholstery',
+      fabricType: 'Multi-Blends',
       price: 4600,
       unit: 'per metre',
-      description: 'Our Fabric of the Year 2027 — a handloom cotton-silk bouclé from Bhujodi, rated for heavy sofa and armchair use. Improves with a decade of wear.',
-      colors: [{ name: 'Mitti', hex: '#B4592F' }, { name: 'Chalk', hex: '#EFE9DD' }],
+      badge: 'Fabric of the Year',
+      description: 'Our signature handloom cotton-silk-linen bouclé, hand-finished in Gujarat. Rated for heavy everyday sofa and banquette use.',
+      colors: [{ name: 'Mitti Earth', hex: '#B4592F' }, { name: 'Chalk Cream', hex: '#EFE9DD' }],
       images: [U13, atelierWide],
-      specs: { Composition: '62% cotton, 28% silk, 10% linen', Weight: '480 GSM, upholstery grade', Durability: '60,000 Martindale rubs', Care: 'Dry clean; brush weekly' }
+      specs: { Composition: '62% Cotton, 28% Silk, 10% Linen', Weight: '480 GSM', RubCount: '60,000 Martindale', Care: 'Spot clean or dry clean' }
     },
     {
-      id: 'upholstery-charcoal-weave',
-      name: 'Charcoal Weave',
+      id: 'upholstery-charcoal-twill',
+      name: 'Heritage Charcoal Heavy Weave',
+      curtainType: 'Heavy Upholstery',
+      fabricType: 'Cotton',
       price: 3200,
       unit: 'per metre',
-      description: 'A dense, stain-guarded cotton-poly blend built for family sofas and high-traffic seating. Holds its structure under daily use.',
-      colors: [{ name: 'Charcoal', hex: '#2B2A27' }, { name: 'Iron Ink', hex: '#2B2622' }],
+      badge: 'Stain Guarded',
+      description: 'High-density cotton twill reinforced with stain protection for high-traffic living rooms and commercial lounges.',
+      colors: [{ name: 'Charcoal', hex: '#2B2A27' }, { name: 'Raw Sand', hex: '#D9C6A5' }],
       images: [U2, patternHerringbone],
-      specs: { Composition: '65% cotton, 35% polyester', Weight: '520 GSM, heavy upholstery', Durability: '75,000 Martindale rubs', Care: 'Stain-guarded, spot clean' }
+      specs: { Composition: '75% Cotton, 25% Poly-Structure', Weight: '520 GSM', RubCount: '75,000 Martindale', Finish: 'Stain-Resistant Coated' }
     },
     {
       id: 'upholstery-sable-herringbone',
-      name: 'Sable Herringbone',
+      name: 'Sable Wool-Linen Herringbone',
+      curtainType: 'Accent Fabrics',
+      fabricType: 'Linen',
       price: 3900,
       unit: 'per metre',
-      description: 'A wool-cotton herringbone in a deep sable brown, woven with a raised chevron texture that reads as menswear tailoring for furniture.',
-      colors: [{ name: 'Sable', hex: '#4A3A2E' }, { name: 'Kharif Sand', hex: '#D9C6A5' }],
+      badge: 'Tailored Finish',
+      description: 'A tailored herringbone chevron weave in rich sable brown, offering a menswear-inspired texture for armchairs and statement headboards.',
+      colors: [{ name: 'Sable Brown', hex: '#4A3A2E' }, { name: 'Muted Sand', hex: '#D9C6A5' }],
       images: [patternHerringbone, atelierDetail],
-      specs: { Composition: '55% wool, 45% cotton', Weight: '495 GSM', Durability: '55,000 Martindale rubs', Care: 'Dry clean only' }
+      specs: { Composition: '50% Pure Linen, 50% Wool Blend', Weight: '495 GSM', RubCount: '55,000 Martindale', Care: 'Dry clean only' }
     },
     {
-      id: 'upholstery-ivory-boucle',
-      name: 'Ivory Bouclé',
-      price: 4200,
+      id: 'upholstery-viscose-plush',
+      name: 'Alkapuri Velvet Viscose Touch',
+      curtainType: 'Banquette & Chair Weaves',
+      fabricType: 'Viscose',
+      price: 4400,
       unit: 'per metre',
-      description: 'A soft, textured ivory bouclé for statement chairs and low benches — the pale counterpart to Mitti, styled here on a rust-toned frame.',
-      colors: [{ name: 'Ivory', hex: '#F1EDE6' }, { name: 'Chalk', hex: '#EFE9DD' }],
-      images: [mittiSofa, aiChair],
-      specs: { Composition: '80% cotton, 20% wool bouclé', Weight: '450 GSM', Durability: '50,000 Martindale rubs', Care: 'Dry clean; brush weekly' }
-    }
-  ],
-  'Wallpapers': [
-    {
-      id: 'wallpapers-bhujodi-trellis',
-      name: 'Bhujodi Trellis',
-      price: 5800,
-      unit: 'per roll',
-      description: 'A hand-block trellis motif adapted from Bhujodi weaving patterns, printed on a paste-the-wall non-woven base.',
-      colors: [{ name: 'Terracotta on Chalk', hex: '#B4592F' }, { name: 'Neem on Chalk', hex: '#33443A' }],
-      images: [U3, patternGrid],
-      specs: { Material: 'Non-woven, paste-the-wall', 'Roll Size': '10m x 53cm', 'Pattern Repeat': '32 cm straight match', Finish: 'Matte' }
-    },
-    {
-      id: 'wallpapers-patan-ikat-grid',
-      name: 'Patan Ikat Grid',
-      price: 6400,
-      unit: 'per roll',
-      description: 'A geometric grid inspired by Patan Patola ikat weaving, rendered as a soft checked windowpane in warm rust and cream.',
-      colors: [{ name: 'Rust & Cream', hex: '#B4592F' }],
-      images: [patternGrid, patternStripe],
-      specs: { Material: 'Non-woven, paste-the-wall', 'Roll Size': '10m x 53cm', 'Pattern Repeat': '18 cm half-drop', Finish: 'Matte' }
-    },
-    {
-      id: 'wallpapers-monsoon-leaf',
-      name: 'Monsoon Leaf',
-      price: 5200,
-      unit: 'per roll',
-      description: 'A soft, watercolour-washed botanical stripe in muted sage and sand — a quiet pattern for bedrooms and reading nooks.',
-      colors: [{ name: 'Sage & Sand', hex: '#6B7A6E' }],
-      images: [patternStripe, U11],
-      specs: { Material: 'Non-woven, paste-the-wall', 'Roll Size': '10m x 53cm', 'Pattern Repeat': '24 cm straight match', Finish: 'Matte, subtle sheen' }
-    },
-    {
-      id: 'wallpapers-chalk-linen-weave',
-      name: 'Chalk Linen Weave',
-      price: 4700,
-      unit: 'per roll',
-      description: 'A textured, linen-look plain wallpaper for anchoring a room without competing with drapery or upholstery patterns.',
-      colors: [{ name: 'Chalk', hex: '#EFE9DD' }, { name: 'Kharif Sand', hex: '#D9C6A5' }],
-      images: [U11, heroLiving],
-      specs: { Material: 'Non-woven, paste-the-wall', 'Roll Size': '10m x 53cm', 'Pattern Repeat': 'No repeat, textured plain', Finish: 'Matte, linen texture' }
+      badge: 'Luxury Handfeel',
+      description: 'A deeply opulent viscose blend with soft tactile pile, styled here for accent ottomans and dining chairs.',
+      colors: [{ name: 'Ivory Cream', hex: '#F1EDE6' }, { name: 'Forest Moss', hex: '#33443A' }],
+      images: [mittiSofa, U14],
+      specs: { Composition: '80% Viscose, 20% Cotton', Weight: '460 GSM', RubCount: '50,000 Martindale', Care: 'Dry clean only' }
     }
   ],
   'Blinds': [
     {
       id: 'blinds-raw-cotton-roman',
-      name: 'Raw Cotton Roman Blind',
+      name: 'Raw Cotton Roman Fold Blind',
+      curtainType: 'Roman Blinds',
+      fabricType: 'Raw Cotton',
       price: 1450,
       unit: 'per sq.ft',
-      description: 'A structured roman fold in raw cotton, made to measure for your recess. Shown here in terracotta over a farmhouse kitchen window.',
+      badge: 'Custom Sized',
+      description: 'A structured roman fold in unbleached raw cotton, engineered to your exact recess dimensions with smooth chain operation.',
       colors: [{ name: 'Terracotta', hex: '#B4592F' }, { name: 'Kharif Sand', hex: '#D9C6A5' }],
       images: [U4, patternStripe],
-      specs: { Material: '100% raw cotton', 'Mount Type': 'Inside or outside recess', 'Light Control': 'Semi-sheer to blackout lining', Care: 'Dry clean; spot wipe rail' }
+      specs: { Mechanism: 'Precision Roman Pulley', Material: '100% Raw Cotton', Mount: 'Inside or Outside Recess', Lining: 'Blackout or Sheer Option' }
     },
     {
       id: 'blinds-bamboo-slat',
-      name: 'Bamboo Slat Blind',
+      name: 'Natural Bamboo Slat Blind',
+      curtainType: 'Bamboo & Wooden Blinds',
+      fabricType: 'Natural Bamboo',
       price: 980,
       unit: 'per sq.ft',
-      description: 'Natural bamboo slats for kitchens and sunrooms, filtering light into warm horizontal bands.',
-      colors: [{ name: 'Natural Bamboo', hex: '#C9A660' }],
+      badge: 'Organic Craft',
+      description: 'Hand-strung natural bamboo slats that cast horizontal stripes of warm, diffused light across kitchens, studies, and verandas.',
+      colors: [{ name: 'Natural Honey Bamboo', hex: '#C9A660' }],
       images: [mittiKitchen, atelierDetail],
-      specs: { Material: 'Natural bamboo slat', 'Mount Type': 'Inside recess', 'Light Control': 'Filtered, semi-privacy', Care: 'Dry dust, avoid direct water' }
+      specs: { Material: 'Sustainable Bamboo Slat', LightFiltration: 'Gentle Day Diffusion', Hardware: 'Brass/Anodized Alloy', Care: 'Dust or dry wipe' }
     },
     {
-      id: 'blinds-sheer-voile-roller',
-      name: 'Sheer Voile Roller Blind',
-      price: 1150,
+      id: 'blinds-motorized-roller',
+      name: 'Adorn Smart Motorized Roller Blind',
+      curtainType: 'Motorized Blinds',
+      fabricType: 'Polyester Mesh',
+      price: 2200,
       unit: 'per sq.ft',
-      description: 'A fine voile roller shade that diffuses harsh sun without losing the view — ideal for living rooms and studies.',
-      colors: [{ name: 'Chalk', hex: '#EFE9DD' }, { name: 'Kharif Sand', hex: '#D9C6A5' }],
-      images: [aiShelves, heroLiving],
-      specs: { Material: '100% polyester voile', 'Mount Type': 'Inside or outside recess', 'Light Control': 'Sheer, daytime privacy', Care: 'Wipe clean, spot wash' }
-    },
-    {
-      id: 'blinds-linen-venetian',
-      name: 'Linen Venetian Blind',
-      price: 1850,
-      unit: 'per sq.ft',
-      description: 'Linen-wrapped wooden slats with a cord-tilt mechanism, engineered for exact recess fit and quiet operation.',
-      colors: [{ name: 'Sable', hex: '#4A3A2E' }, { name: 'Chalk', hex: '#EFE9DD' }],
-      images: [atelierDetail, U10],
-      specs: { Material: 'Linen-wrapped basswood slat', 'Mount Type': 'Inside recess', 'Light Control': 'Adjustable tilt, full block', Care: 'Dry dust; spot wipe' }
+      badge: 'Smart Automation',
+      description: 'Whisper-quiet motorized roller blind integrated with smart home apps and Alexa/Google Home. Screen fabric with 3% openness.',
+      colors: [{ name: 'Chalk White', hex: '#EFE9DD' }, { name: 'Slate Grey', hex: '#6B7A6E' }],
+      images: [U10, heroLiving],
+      specs: { Motor: 'Somfy / Adorn Smart RF Motor', Power: 'Rechargeable Li-Ion / Hardwired', Openness: '3% Solar Screen', Warranty: '5 Years Motor' }
     }
   ],
-  'Wooden Flooring': [
+  'Custom Furniture': [
+    {
+      id: 'furniture-alkapuri-lounge-sofa',
+      name: 'The Alkapuri 3-Seater Lounge Sofa',
+      curtainType: 'Bespoke Sofas',
+      fabricType: 'Handloom Bouclé',
+      price: 115000,
+      unit: 'per unit',
+      badge: 'Custom Crafted',
+      description: 'Handcrafted solid teak frame with high-resilience multi-density foam and feather-down wrap, upholstered in our Mitti 2027 handloom bouclé.',
+      colors: [{ name: 'Terracotta Earth', hex: '#B4592F' }, { name: 'Chalk Bouclé', hex: '#EFE9DD' }],
+      images: [U14, mittiSofa],
+      specs: { Frame: 'Kiln-Dried CP Teak Wood', Foam: 'High Density 40D + Down Feathers', Dimensions: '90" W x 38" D x 32" H', LeadTime: '3-4 Weeks' }
+    },
+    {
+      id: 'furniture-kutch-accent-armchair',
+      name: 'The Kutch Wingback Accent Armchair',
+      curtainType: 'Accent Armchairs',
+      fabricType: 'Cotton-Linen Weave',
+      price: 48000,
+      unit: 'per unit',
+      badge: 'Architectural',
+      description: 'An ergonomic curved wingback chair framed in oiled natural teak and upholstered in bespoke textured weave.',
+      colors: [{ name: 'Forest Neem', hex: '#33443A' }, { name: 'Ochre Glow', hex: '#B4832E' }],
+      images: [U15, atelierWide],
+      specs: { Frame: 'Solid Teak with Brass Tips', Cushioning: 'Ergonomic Molded HR Foam', Finish: 'Matte Polyurethane Clear Coat', Customization: 'Any Atelier Fabric' }
+    }
+  ],
+  'Wall Coverings': [
+    {
+      id: 'wallpapers-sabyasachi-nilaya',
+      name: 'Asian Paints Nilaya × Sabyasachi Royal Bengal Motif',
+      curtainType: 'Wallpapers',
+      fabricType: 'Non-Woven Paper',
+      price: 8900,
+      unit: 'per roll',
+      badge: 'Designer Exclusive',
+      description: 'Authentic Sabyasachi designed wallpaper featuring hand-drawn botanical flora and royal Indian heritage motifs on luxury non-woven substrate.',
+      colors: [{ name: 'Royal Terracotta & Gold', hex: '#B4592F' }, { name: 'Heritage Indigo', hex: '#41567F' }],
+      images: [U3, patternGrid],
+      specs: { Brand: 'Asian Paints Nilaya × Sabyasachi', RollDimensions: '10m x 53cm', Substrate: 'Luxury Non-Woven', Match: 'Straight Match 64cm' }
+    },
+    {
+      id: 'wallpapers-acoustic-fabric-panelling',
+      name: 'Acoustic Fabric Feature Panelling',
+      curtainType: 'Fabric Panelling',
+      fabricType: 'Acoustic Linen Panelling',
+      price: 450,
+      unit: 'per sq.ft',
+      badge: 'Sound Dampening',
+      description: 'Modular padded wall panelling wrapped in tailored linen fabric with sound-absorbing acoustic foam backing for home theatres and bedrooms.',
+      colors: [{ name: 'Sand Linen', hex: '#D9C6A5' }, { name: 'Charcoal Slate', hex: '#2B2A27' }],
+      images: [U11, patternSolid],
+      specs: { NRC: '0.75 Sound Absorption', Thickness: '25 mm / 50 mm', Installation: 'Concealed Z-Clip System', Fabric: 'FR-Treated Linen Blend' }
+    },
+    {
+      id: 'wallpapers-natural-veneer',
+      name: 'Excel Natural Teak Veneer Wall Covering',
+      curtainType: 'Veneer Wallpapers',
+      fabricType: 'Natural Wood Veneer',
+      price: 620,
+      unit: 'per sq.ft',
+      badge: 'Pure Wood',
+      description: 'Micro-thin flexible real wood veneer backed with fleece for curved walls, feature headboards, and executive boardrooms.',
+      colors: [{ name: 'Golden Teak', hex: '#8A6A4A' }, { name: 'Smoked Walnut', hex: '#4A3A2E' }],
+      images: [heroLiving, U5],
+      specs: { Material: '100% Genuine Teak / Walnut Veneer', Flexibility: 'Bends around 50mm radius', Finish: 'Matte Protective Seal', Care: 'Dry microfiber wipe' }
+    }
+  ],
+  'Flooring': [
     {
       id: 'flooring-golden-oak-plank',
-      name: 'Golden Oak Engineered Plank',
-      price: 380,
+      name: 'Golden Oak Engineered Hardwood Plank',
+      curtainType: 'Engineered Wood Flooring',
+      fabricType: 'European Oak',
+      price: 420,
       unit: 'per sq.ft',
-      description: 'A wide-plank engineered oak with a warm honey finish, stable across Indian humidity swings.',
-      colors: [{ name: 'Golden Oak', hex: '#C9A660' }],
+      badge: 'Best Seller',
+      description: 'Wide-plank engineered European oak with UV-cured matte lacquer, engineered for lasting stability across Indian climatic variations.',
+      colors: [{ name: 'Golden Honey Oak', hex: '#C9A660' }],
       images: [U5, heroLiving],
-      specs: { Species: 'European oak, engineered', 'Plank Size': '190 x 1900 mm', Finish: 'Matte lacquer', Installation: 'Floating or glue-down' }
+      specs: { Species: 'European White Oak', Dimensions: '190mm W x 1900mm L x 14mm T', TopLayer: '3mm Solid Oak Wear Layer', Warranty: '15 Years Residential' }
     },
     {
       id: 'flooring-smoked-walnut-herringbone',
-      name: 'Smoked Walnut Herringbone',
-      price: 520,
+      name: 'Smoked Walnut Parquet Herringbone',
+      curtainType: 'Engineered Wood Flooring',
+      fabricType: 'American Walnut',
+      price: 560,
       unit: 'per sq.ft',
-      description: 'Deep smoked walnut laid in a classic herringbone pattern, for living rooms that want quiet drama underfoot.',
+      badge: 'Architectural Favorite',
+      description: 'Precision-cut herringbone blocks of deep American walnut that impart quiet architectural grandeur underfoot.',
       colors: [{ name: 'Smoked Walnut', hex: '#4A3A2E' }],
-      images: [aiKitchen, patternHerringbone],
-      specs: { Species: 'American walnut, engineered', 'Plank Size': '90 x 450 mm herringbone', Finish: 'Oiled, low-sheen', Installation: 'Glue-down parquet' }
+      images: [U12, patternHerringbone],
+      specs: { Species: 'American Walnut', Pattern: 'Classic 90° Herringbone', Finish: 'Natural Hardwax Oil', Installation: 'Glue-Down Parquet' }
     },
     {
-      id: 'flooring-weathered-teak-wide-plank',
-      name: 'Weathered Teak Wide Plank',
-      price: 460,
+      id: 'flooring-heavy-spc',
+      name: 'Rigid Core SPC Waterproof Flooring',
+      curtainType: 'SPC Flooring',
+      fabricType: 'Heavy SPC Polymer',
+      price: 185,
       unit: 'per sq.ft',
-      description: 'Solid teak with a hand-distressed, weathered surface — sourced and finished by our own flooring artisans.',
-      colors: [{ name: 'Weathered Teak', hex: '#8A6A4A' }],
-      images: [heroLiving, atelierWide],
-      specs: { Species: 'Solid teak', 'Plank Size': '150 x 1200 mm', Finish: 'Hand-distressed, oiled', Installation: 'Nail-down or glue-down' }
-    },
-    {
-      id: 'flooring-ash-grey-matte',
-      name: 'Ash Grey Matte Finish',
-      price: 340,
-      unit: 'per sq.ft',
-      description: 'A cool, contemporary ash-grey engineered plank for minimalist interiors and studio apartments.',
-      colors: [{ name: 'Ash Grey', hex: '#8C8880' }],
-      images: [aiShelves, U5],
-      specs: { Species: 'European oak, grey-washed', 'Plank Size': '190 x 1900 mm', Finish: 'Matte, low-sheen', Installation: 'Floating or glue-down' }
+      badge: '100% Waterproof',
+      description: 'Stone plastic composite flooring with integrated IXPE acoustic underlay. Scratch-proof, pet-friendly, and completely impervious to water.',
+      colors: [{ name: 'Nordic Ash', hex: '#8C8880' }, { name: 'Warm Teak', hex: '#8A6A4A' }],
+      images: [U10, U5],
+      specs: { Core: 'Stone Polymer Composite 5.5mm', WearLayer: '0.55mm Commercial Grade', ClickSystem: 'Unilin Easy-Lock', Underlay: '1.5mm Acoustic Foam' }
     }
   ],
-  'Home Linen': [
+  'Home Linens': [
     {
-      id: 'linen-kutch-cotton-bedding',
-      name: 'Kutch Cotton Bedding Set',
-      price: 6800,
+      id: 'linens-kutch-cotton-bedset',
+      name: 'Kutch Hand Block-Printed 300TC Cotton Bedding Set',
+      curtainType: 'Bedroom Sets',
+      fabricType: 'Cotton Percale 300TC',
+      price: 7400,
       unit: 'per set',
-      description: 'A 300-thread-count cotton percale set, hand block-printed in Kutch — includes fitted sheet, flat sheet and two pillowcases.',
-      colors: [{ name: 'Kharif Sand', hex: '#D9C6A5' }, { name: 'Terracotta', hex: '#B4592F' }],
+      badge: 'Hand Block Print',
+      description: 'Cool, crisp 300-thread-count cotton percale hand-printed with wooden blocks by Kutch artisans. Includes 1 King sheet and 2 pillowcases.',
+      colors: [{ name: 'Terracotta & Sand', hex: '#B4592F' }, { name: 'Indigo Flora', hex: '#41567F' }],
       images: [U6, heroLiving],
-      specs: { Composition: '100% cotton percale, 300 TC', Set: 'Fitted + flat sheet, 2 pillowcases', Finish: 'Hand block-printed', Care: 'Machine wash cold' }
+      specs: { ThreadCount: '300 TC 100% Long-Staple Cotton', SetIncludes: '1 King Fitted Sheet, 2 Pillowcases', Dye: 'AZO-Free Natural Washes', Care: 'Cold Machine Wash' }
     },
     {
-      id: 'linen-mulberry-silk-pillow',
-      name: 'Mulberry Silk Pillow Set',
-      price: 9200,
-      unit: 'per set',
-      description: 'Pure mulberry silk pillowcases in a set of two, finished with a hand-rolled hem.',
-      colors: [{ name: 'Chalk', hex: '#EFE9DD' }, { name: 'Ochre', hex: '#B4832E' }],
-      images: [aiChair, patternSolid],
-      specs: { Composition: '100% mulberry silk, 22 momme', Set: '2 pillowcases', Finish: 'Hand-rolled hem', Care: 'Dry clean or gentle hand wash' }
+      id: 'linens-mulberry-silk-cushions',
+      name: 'Mulberry Silk & Linen Decorative Cushion Set',
+      curtainType: 'Decorative Cushions',
+      fabricType: 'Mulberry Silk',
+      price: 3600,
+      unit: 'set of 2',
+      badge: 'Luxury Accent',
+      description: 'Set of two decorative 18×18 inch cushion covers featuring pure mulberry silk front and textured natural linen backing.',
+      colors: [{ name: 'Chalk Ivory', hex: '#EFE9DD' }, { name: 'Ochre Amber', hex: '#B4832E' }],
+      images: [mittiSofa, patternSolid],
+      specs: { Dimensions: '45 x 45 cm (18 x 18 inches)', FillOption: 'Microfiber Feather Touch Included', Closure: 'Concealed YKK Zipper', Care: 'Dry Clean Recommended' }
     },
     {
-      id: 'linen-sand-linen-duvet',
-      name: 'Sand Linen Duvet Set',
-      price: 8400,
-      unit: 'per set',
-      description: 'Stonewashed European linen in a warm sand tone, softening with every wash. Includes duvet cover and two shams.',
-      colors: [{ name: 'Kharif Sand', hex: '#D9C6A5' }, { name: 'Neem', hex: '#33443A' }],
-      images: [patternSolid, U10],
-      specs: { Composition: '100% stonewashed linen', Set: 'Duvet cover + 2 shams', Finish: 'Pre-washed, softened', Care: 'Machine wash cold, tumble dry low' }
+      id: 'linens-trident-bath-collection',
+      name: 'Trident Grandeur 700 GSM Egyptian Cotton Towel Set',
+      curtainType: 'Bath Linens',
+      fabricType: 'Cotton',
+      price: 2800,
+      unit: 'set of 3',
+      badge: 'Ultra Absorbent',
+      description: 'Plush 700 GSM combed cotton bath towel set offering hotel-grade softness and rapid drying capability.',
+      colors: [{ name: 'Muted Sand', hex: '#D9C6A5' }, { name: 'Charcoal Grey', hex: '#2B2A27' }],
+      images: [U6, U13],
+      specs: { Weight: '700 GSM Heavyweight', Set: '1 Bath Towel, 1 Hand Towel, 1 Face Towel', Material: '100% Combed Zero-Twist Cotton', Care: 'Machine wash 40°C' }
+    }
+  ],
+  'Carpets & Rugs': [
+    {
+      id: 'rugs-bhujodi-pitloom-dhurrie',
+      name: 'Bhujodi Handwoven Heritage Dhurrie',
+      curtainType: 'Handmade Rugs',
+      fabricType: 'Pit-Loomed Cotton',
+      price: 24000,
+      unit: 'per unit',
+      badge: 'Master Weaver Craft',
+      description: 'Flat-woven by master weavers in Bhujodi on traditional pit looms using organic indigenous cotton and sheep wool.',
+      colors: [{ name: 'Indigo & Terracotta', hex: '#41567F' }],
+      images: [mittiCraft, U8],
+      specs: { Origin: 'Bhujodi, Kutch', Technique: 'Pit-Loom Flatweave', Dimensions: '5 ft x 8 ft (Custom Available)', Care: 'Professional Rug Clean' }
     },
     {
-      id: 'linen-block-print-quilt',
-      name: 'Block-Print Quilt Set',
-      price: 7600,
-      unit: 'per set',
-      description: 'A lightly quilted cotton throw and pillow set, hand block-printed in a Bhujodi-inspired trellis motif.',
-      colors: [{ name: 'Terracotta on Chalk', hex: '#B4592F' }],
-      images: [patternGrid, atelierDetail],
-      specs: { Composition: '100% cotton, cotton-fill quilting', Set: 'Quilt + 2 cushion covers', Finish: 'Hand block-printed', Care: 'Machine wash gentle cycle' }
+      id: 'rugs-jaipur-hand-knotted',
+      name: 'Jaipur Rugs Artisan Wool Knotted Carpet',
+      curtainType: 'Carpets',
+      fabricType: 'Hand-Spun Wool',
+      price: 58000,
+      unit: 'per unit',
+      badge: 'Hand Knotted',
+      description: 'High knot-count virgin wool carpet crafted in Rajasthan, offering rich underfoot texture and generational durability.',
+      colors: [{ name: 'Terracotta Rust', hex: '#B4592F' }, { name: 'Chalk Cream', hex: '#EFE9DD' }],
+      images: [U8, mittiCraft],
+      specs: { Brand: 'Jaipur Rugs Collection', KnotDensity: '120 Knots per sq. inch', Dimensions: '6 ft x 9 ft', PileHeight: '12 mm Soft Plush' }
     }
   ],
   'Mattresses': [
     {
-      id: 'mattress-cloud-cotton-memory',
-      name: 'Cloud Cotton Memory Mattress',
-      price: 42000,
-      unit: 'each',
-      description: 'A medium-soft memory foam core wrapped in natural cotton quilting, for side and back sleepers.',
-      colors: [{ name: 'Chalk', hex: '#EFE9DD' }],
-      images: [U7, U13],
-      specs: { Firmness: 'Medium-soft', 'Size Options': 'Single, Queen, King, Custom', Layers: 'Memory foam + cotton quilt top', Warranty: '10 years' }
-    },
-    {
-      id: 'mattress-coir-classic-orthopedic',
-      name: 'Coir Classic Orthopedic Mattress',
-      price: 28000,
-      unit: 'each',
-      description: 'A firm coir and rubberised-latex build for back support, finished with a breathable cotton cover.',
-      colors: [{ name: 'Chalk', hex: '#EFE9DD' }],
-      images: [U10, atelierDetail],
-      specs: { Firmness: 'Firm', 'Size Options': 'Single, Queen, King, Custom', Layers: 'Coir + rubberised latex', Warranty: '7 years' }
-    },
-    {
-      id: 'mattress-latex-bloom',
-      name: 'Latex Bloom Mattress',
+      id: 'mattress-king-koil-ortho',
+      name: 'King Koil World Luxury Orthopedic Spine-Guard',
+      curtainType: 'Hybrid Pocket Spring',
+      fabricType: 'Organic Cotton Quilted',
       price: 54000,
-      unit: 'each',
-      description: 'Natural Dunlop latex layered for pressure relief with a plush, breathable knit cover.',
-      colors: [{ name: 'Ivory', hex: '#F1EDE6' }],
-      images: [aiChair, U7],
-      specs: { Firmness: 'Medium', 'Size Options': 'Queen, King, Custom', Layers: 'Natural latex + breathable knit', Warranty: '12 years' }
+      unit: 'per unit',
+      badge: 'Doctor Recommended',
+      description: 'Independently encased 5-zone pocket springs topped with high-density contour foam and breathable natural cotton quilting.',
+      colors: [{ name: 'Chalk White & Deep Grey', hex: '#EFE9DD' }],
+      images: [U7, U10],
+      specs: { Brand: 'King Koil Mattresses', Core: '5-Zone Pocket Springs + Contour Foam', ComfortLevel: 'Medium Firm', Warranty: '10 Years Comprehensive' }
     },
     {
-      id: 'mattress-hybrid-pocket-spring',
-      name: 'Hybrid Pocket Spring Mattress',
-      price: 68000,
-      unit: 'each',
-      description: 'Individually wrapped pocket springs beneath a natural fibre and foam comfort layer, for minimal partner disturbance.',
-      colors: [{ name: 'Chalk', hex: '#EFE9DD' }],
-      images: [atelierWide, U10],
-      specs: { Firmness: 'Medium-firm', 'Size Options': 'Queen, King, Custom', Layers: 'Pocket springs + foam + fibre top', Warranty: '10 years' }
-    }
-  ],
-  'Rugs & Carpets': [
-    {
-      id: 'rugs-bhujodi-handwoven-dhurrie',
-      name: 'Bhujodi Handwoven Dhurrie',
-      price: 22000,
-      unit: 'each',
-      description: 'A flat-woven cotton-wool dhurrie made on a pit loom in Bhujodi, in the indigo and rust tones of the region.',
-      colors: [{ name: 'Indigo & Rust', hex: '#41567F' }],
-      images: [mittiCraft, U8],
-      specs: { Material: 'Cotton-wool blend', Weave: 'Flat-woven, pit loom', 'Pile Height': 'Flat, no pile', Care: 'Vacuum, professional wash' }
-    },
-    {
-      id: 'rugs-kutch-wool-rug',
-      name: 'Kutch Wool Rug',
-      price: 34000,
-      unit: 'each',
-      description: 'A hand-knotted wool rug in deep terracotta, dense enough to anchor a full living room seating group.',
-      colors: [{ name: 'Terracotta', hex: '#B4592F' }],
-      images: [U8, mittiCraft],
-      specs: { Material: '100% hand-spun wool', Weave: 'Hand-knotted', 'Pile Height': '12 mm', Care: 'Professional wash only' }
-    },
-    {
-      id: 'rugs-jute-cotton-blend',
-      name: 'Jute & Cotton Blend Rug',
-      price: 18500,
-      unit: 'each',
-      description: 'A durable jute-cotton blend rug with a herringbone weave, suited to high-traffic hallways and dining rooms.',
-      colors: [{ name: 'Kharif Sand', hex: '#D9C6A5' }],
-      images: [patternHerringbone, mittiSofa],
-      specs: { Material: 'Jute-cotton blend', Weave: 'Herringbone, flat-woven', 'Pile Height': 'Flat, low pile', Care: 'Vacuum regularly, spot clean' }
-    },
-    {
-      id: 'rugs-silk-touch-persian-knot',
-      name: 'Silk-Touch Persian Knot Rug',
-      price: 52000,
-      unit: 'each',
-      description: 'A fine wool-and-silk-blend rug hand-knotted in a traditional Persian pattern, for formal living and dining rooms.',
-      colors: [{ name: 'Chalk & Rust', hex: '#B4592F' }],
-      images: [mittiSofa, patternSolid],
-      specs: { Material: 'Wool with silk highlights', Weave: 'Hand-knotted', 'Pile Height': '8 mm', Care: 'Professional wash only' }
+      id: 'mattress-buoninfante-latex',
+      name: 'Buoninfante Pure Italian Dunlop Latex Sleep System',
+      curtainType: 'Natural Latex',
+      fabricType: 'Natural Latex Core',
+      price: 72000,
+      unit: 'per unit',
+      badge: 'Made in Italy',
+      description: '100% botanical Dunlop latex with open-cell micro-ventilation, offering pinpoint orthopedic spine alignment with zero partner disturbance.',
+      colors: [{ name: 'Pure Ivory Knit', hex: '#F1EDE6' }],
+      images: [U13, U7],
+      specs: { Brand: 'Buoninfante Mattresses', Core: '100% Natural Dunlop Latex', Firmness: 'Adaptive Ergonomic', Certification: 'OEKO-TEX Standard 100' }
     }
   ]
 };
 
+// Fallback lookup functions
 export function getProductsByCategory(category) {
   return PRODUCTS[category] || [];
 }

@@ -4,39 +4,33 @@ import aiShelves from '../assets/ai-shelves.jpg';
 import aiChair from '../assets/ai-chair.jpg';
 import aiBridge from '../assets/ai-bridge.jpg';
 import aiKitchen from '../assets/ai-kitchen.jpg';
+import { getStoredCategories, getStoredCategoryMeta, getStoredProducts, getStoredBrands, getStoredClients } from '../data/storage';
 
 export default function HomeView({ onNavigate, onSelectCategory }) {
   const [hoverCat, setHoverCat] = useState(-1);
   const [previewPos, setPreviewPos] = useState({ x: 0, y: 0 });
   const previewRef = useRef(null);
 
-  const CATS = [
-    'Curtains',
-    'Upholstery Fabrics',
-    'Wallpapers',
-    'Blinds',
-    'Wooden Flooring',
-    'Home Linen',
-    'Mattresses',
-    'Rugs & Carpets'
-  ];
+  const [categories, setCategories] = useState(getStoredCategories());
+  const [categoryMeta, setCategoryMeta] = useState(getStoredCategoryMeta());
+  const [products, setProducts] = useState(getStoredProducts());
+  const [brands, setBrands] = useState(getStoredBrands());
+  const [clients, setClients] = useState(getStoredClients());
 
-  const IMGS = [
-    'https://images.unsplash.com/photo-1691036561573-4b76998b60de?w=1600&q=80',
-    'https://images.unsplash.com/photo-1544691560-fc2053d97726?w=1600&q=80',
-    'https://images.unsplash.com/photo-1558882224-dda166733046?w=1600&q=80',
-    'https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?w=600&q=80',
-    'https://images.unsplash.com/photo-1618220179428-22790b461013?w=1600&q=80',
-    'https://images.unsplash.com/photo-1619459075136-2b53c6153d4f?w=1600&q=80',
-    'https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=1600&q=80',
-    'https://images.unsplash.com/photo-1691036561573-4b76998b60de?w=1200&q=80'
-  ];
-
-  const CAT_COUNTS = [42, 68, 120, 24, 18, 36, 12, 54];
+  useEffect(() => {
+    const handleUpdate = () => {
+      setCategories(getStoredCategories());
+      setCategoryMeta(getStoredCategoryMeta());
+      setProducts(getStoredProducts());
+      setBrands(getStoredBrands());
+      setClients(getStoredClients());
+    };
+    window.addEventListener('aesthetics_data_updated', handleUpdate);
+    return () => window.removeEventListener('aesthetics_data_updated', handleUpdate);
+  }, []);
 
   const handleMouseMove = (e) => {
     const container = e.currentTarget.getBoundingClientRect();
-    // Calculate cursor position relative to container
     const x = Math.max(0, Math.min(e.clientX - container.left + 56, container.width - 330));
     const y = Math.max(-40, Math.min(e.clientY - container.top - 200, container.height - 360));
     setPreviewPos({ x, y });
@@ -64,7 +58,7 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
 
   return (
     <main className="animate-fade">
-      {/* Hero Section */}
+      {/* 1. Hero Section */}
       <section className="sec-pad home-hero" style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
@@ -77,56 +71,79 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
             fontSize: '11px',
             letterSpacing: '3.5px',
             color: 'var(--accent)',
-            marginBottom: '30px',
+            marginBottom: '26px',
             fontWeight: 500
-          }}>VADODARA · EST. 1972</div>
+          }}>VADODARA · FIVE DECADES OF HERITAGE</div>
           <h1 style={{
             fontFamily: 'var(--serif)',
             fontWeight: 500,
-            fontSize: 'clamp(44px, 8.5vw, 92px)',
+            fontSize: 'clamp(44px, 8.5vw, 88px)',
             lineHeight: 0.94,
             letterSpacing: '-1px',
-            marginBottom: '30px'
+            marginBottom: '28px'
           }}>
             The home,<br />
             <em style={{ fontStyle: 'italic', fontWeight: 500 }}>considered.</em>
           </h1>
           <p style={{
             fontSize: '16px',
-            lineHeight: 1.75,
+            lineHeight: 1.8,
             color: '#5C554A',
-            maxWidth: '400px',
-            marginBottom: '40px'
+            maxWidth: '440px',
+            marginBottom: '36px'
           }}>
-            Curtains, upholstery, flooring and home textiles — designed in our Vadodara atelier and made to the measure of your space.
+            Curtains, upholstery fabrics, custom furniture, wallpapers, and bespoke flooring — crafted in our Vadodara atelier to the measure of your space.
           </p>
-          <button
-            type="button"
-            onClick={() => onNavigate('collections')}
-            style={{
-              border: 'none',
-              background: 'none',
-              cursor: 'pointer',
-              padding: 0,
-              fontFamily: 'var(--sans)',
-              fontSize: '11px',
-              letterSpacing: '3px',
-              color: '#211C16',
-              borderBottom: '1px solid #211C16',
-              paddingBottom: '6px',
-              fontWeight: 500
-            }}
-          >
-            EXPLORE COLLECTIONS &nbsp;→
-          </button>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              onClick={() => onNavigate('collections')}
+              style={{
+                border: 'none',
+                background: 'var(--accent)',
+                color: '#fff',
+                cursor: 'pointer',
+                padding: '16px 32px',
+                fontFamily: 'var(--sans)',
+                fontSize: '11px',
+                letterSpacing: '3px',
+                fontWeight: 500,
+                transition: 'background-color 0.2s ease'
+              }}
+              className="accent-button"
+            >
+              EXPLORE COLLECTIONS →
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('visit')}
+              style={{
+                border: 'none',
+                background: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                fontFamily: 'var(--sans)',
+                fontSize: '11px',
+                letterSpacing: '2.5px',
+                color: '#211C16',
+                borderBottom: '1px solid #211C16',
+                paddingBottom: '4px',
+                fontWeight: 500
+              }}
+            >
+              SCHEDULE A STUDIO VISIT
+            </button>
+          </div>
         </div>
+
         <div className="home-hero-img" style={{
           aspectRatio: '4/4.4',
-          background: `#DED7CB url(${heroLiving}) center/cover no-repeat`
+          background: `#DED7CB url(${heroLiving}) center/cover no-repeat`,
+          boxShadow: '0 20px 50px rgba(33,28,22,0.08)'
         }}></div>
       </section>
 
-      {/* Fabric of the Year Band */}
+      {/* 2. Fabric of the Year Band */}
       <button
         type="button"
         onClick={() => onNavigate('fabric')}
@@ -176,38 +193,364 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
         }}>READ THE STORY →</span>
       </button>
 
-      {/* Philosophy & Craft Standards Section */}
-      <section className="sec-pad" style={{ padding: '110px 56px', background: '#FCFAF6', borderBottom: '1px solid rgba(33,28,22,0.08)' }}>
-        <div className="reveal" style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>OUR APPROACH</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(32px, 6vw, 56px)', lineHeight: 1.05, letterSpacing: '-0.5px' }}>
-            Weaving heritage <em style={{ fontStyle: 'italic' }}>into modern spaces.</em>
-          </h2>
-        </div>
+      {/* 3. OUR STORY SECTION (Exact authentic brand narrative) */}
+      <section className="sec-pad" style={{
+        padding: '110px 56px',
+        background: '#FAF7F2',
+        borderBottom: '1px solid rgba(33,28,22,0.08)'
+      }}>
+        <div className="reveal story-container" style={{
+          maxWidth: '1080px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1.2fr',
+          gap: '64px',
+          alignItems: 'start'
+        }}>
+          <div>
+            <div style={{
+              fontSize: '11px',
+              letterSpacing: '3.5px',
+              color: 'var(--accent)',
+              marginBottom: '20px',
+              fontWeight: 600
+            }}>OUR STORY</div>
+            <h2 style={{
+              fontFamily: 'var(--serif)',
+              fontWeight: 500,
+              fontSize: 'clamp(34px, 6vw, 54px)',
+              lineHeight: 1.05,
+              letterSpacing: '-0.5px',
+              marginBottom: '28px',
+              color: '#211C16'
+            }}>
+              Every beautiful space begins with <em style={{ fontStyle: 'italic' }}>a story.</em>
+            </h2>
+            <div style={{
+              background: '#EAE3D5',
+              padding: '24px',
+              borderLeft: '3px solid var(--accent)',
+              fontFamily: 'var(--serif)',
+              fontSize: '19px',
+              lineHeight: 1.6,
+              fontStyle: 'italic',
+              color: '#2C271F'
+            }}>
+              “History gives us our roots, but the future gives us our purpose.”
+            </div>
+          </div>
 
-        <div className="reveal philosophy-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '48px' }}>
-          <div style={{ borderTop: '1px solid rgba(33,28,22,0.16)', paddingTop: '32px' }}>
-            <div style={{ fontFamily: 'var(--serif)', fontSize: '24px', fontWeight: 500, marginBottom: '16px', color: '#211C16' }}>01 · Made to Measure</div>
-            <p style={{ fontSize: '14.5px', lineHeight: 1.75, color: '#5C554A', margin: 0 }}>
-              No pre-cut rolls, no generic sizes. Every curtain, drape, and blind is engineered and tailored in our Vadodara studio to fit the unique blueprint and lighting profile of your home.
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', fontSize: '15.5px', lineHeight: 1.85, color: '#554E44' }}>
+            <p style={{ margin: 0 }}>
+              Our journey began <strong>nearly five decades ago as Jaylaxmi Furnishings</strong>, built on a simple promise—to offer quality, honesty, and relationships that last. These values became the foundation of everything we do and continue to guide us even today.
             </p>
-          </div>
-          <div style={{ borderTop: '1px solid rgba(33,28,22,0.16)', paddingTop: '32px' }}>
-            <div style={{ fontFamily: 'var(--serif)', fontSize: '24px', fontWeight: 500, marginBottom: '16px', color: '#211C16' }}>02 · Heritage Clusters</div>
-            <p style={{ fontSize: '14.5px', lineHeight: 1.75, color: '#5C554A', margin: 0 }}>
-              We partner directly with traditional weaving families in Bhujodi, Patan, and Kanodar. Sourcing organic cotton, mulberry silk, and hand-dyed yarns that tell a story of regional craftsmanship.
+            <p style={{ margin: 0 }}>
+              In <strong>2017</strong>, that legacy evolved into <strong>Aesthetics</strong>—a modern home décor destination created to meet the changing aspirations of contemporary homes while staying true to the ethics that built our name.
             </p>
-          </div>
-          <div style={{ borderTop: '1px solid rgba(33,28,22,0.16)', paddingTop: '32px' }}>
-            <div style={{ fontFamily: 'var(--serif)', fontSize: '24px', fontWeight: 500, marginBottom: '16px', color: '#211C16' }}>03 · Intelligent Design</div>
-            <p style={{ fontSize: '14.5px', lineHeight: 1.75, color: '#5C554A', margin: 0 }}>
-              We combine legacy loom crafts with our custom AI visualization tool. You can experiment with fabrics, colors, and styling on photorealistic models before production starts.
+            <p style={{ margin: 0 }}>
+              At Aesthetics, we believe history gives us our roots, but the future gives us our purpose. While we proudly honour our heritage, we continuously explore new ideas, global trends, premium furniture designs, and carefully curated soft furnishings to help create homes that are timeless, elegant, and deeply personal.
             </p>
+            <p style={{ margin: 0 }}>
+              Today, Aesthetics has grown into one of the most trusted names in home décor—not just in Vadodara, but among discerning homeowners, architects, and designers across India. The awards and recognitions we have received from the brands we represent are a reflection of our commitment to quality, craftsmanship, and customer satisfaction.
+            </p>
+            <div style={{
+              marginTop: '12px',
+              paddingTop: '20px',
+              borderTop: '1px solid #E0D8CA',
+              fontFamily: 'var(--serif)',
+              fontSize: '18px',
+              color: '#211C16',
+              fontWeight: 500
+            }}>
+              For us, every project is more than furnishing a house—it's about helping our customers create a space they truly love to call home.
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Green AI Teaser */}
+      {/* 4. TRUSTED COMMERCIAL & INSTITUTIONAL CLIENTS SHOWCASE */}
+      <section className="sec-pad" style={{
+        padding: '90px 56px',
+        background: '#1F1B16',
+        color: '#F5F1E8'
+      }}>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
+          <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: '#C98A5E', marginBottom: '16px', fontWeight: 600 }}>
+            PRESTIGIOUS PORTFOLIO
+          </div>
+          <h2 style={{
+            fontFamily: 'var(--serif)',
+            fontWeight: 500,
+            fontSize: 'clamp(30px, 5.5vw, 48px)',
+            lineHeight: 1.08,
+            color: '#FFFFFF',
+            margin: 0
+          }}>
+            Brands That Have <em style={{ fontStyle: 'italic', color: '#E8C9AF' }}>Trusted Us.</em>
+          </h2>
+          <p style={{ fontSize: '15px', color: '#C0B7A8', maxWidth: '580px', margin: '14px auto 0' }}>
+            Trusted by India’s leading hotel chains, universities, corporate headquarters, healthcare campuses, and architecture studios.
+          </p>
+        </div>
+
+        {/* Client Badges Grid */}
+        <div className="reveal client-grid" style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: '16px',
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
+          {clients.map((c, idx) => (
+            <div
+              key={idx}
+              className="client-card"
+              style={{
+                background: 'rgba(255, 255, 255, 0.04)',
+                border: '1px solid rgba(255, 255, 255, 0.09)',
+                padding: '22px 20px',
+                textAlign: 'center',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              <div style={{ fontSize: '24px', marginBottom: '8px' }}>{c.icon || '🏛️'}</div>
+              <div style={{
+                fontFamily: 'var(--serif)',
+                fontSize: '18px',
+                color: '#FFFFFF',
+                fontWeight: 500,
+                marginBottom: '4px'
+              }}>
+                {c.name}
+              </div>
+              <div style={{
+                fontSize: '11px',
+                letterSpacing: '1px',
+                color: '#9E978C'
+              }}>
+                {c.type}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. 9 PRODUCT COLLECTIONS (Hover sensitive) */}
+      <section className="sec-pad" style={{ padding: '96px 56px 110px', background: '#FCFAF6' }}>
+        <div className="collections-head" style={{
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'space-between',
+          marginBottom: '44px'
+        }}>
+          <div>
+            <div style={{
+              fontSize: '11px',
+              letterSpacing: '3.5px',
+              color: 'var(--accent)',
+              marginBottom: '16px',
+              fontWeight: 500
+            }}>OUR 9 PRODUCT DEPARTMENTS</div>
+            <h2 style={{
+              fontFamily: 'var(--serif)',
+              fontWeight: 500,
+              fontSize: 'clamp(32px, 6vw, 52px)',
+              lineHeight: 1.05,
+              letterSpacing: '-0.5px',
+              margin: 0
+            }}>
+              Everything for the<br />
+              <em style={{ fontStyle: 'italic' }}>considered</em> home.
+            </h2>
+          </div>
+          <p style={{
+            fontSize: '15px',
+            lineHeight: 1.7,
+            color: '#5C554A',
+            maxWidth: '360px',
+            marginBottom: '6px'
+          }}>
+            From bespoke drapery to flooring, wallpapers, custom furniture, and sleep systems.
+          </p>
+        </div>
+
+        {/* Hover-Sensitive Collections List */}
+        <div 
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => setHoverCat(-1)}
+          style={{
+            position: 'relative',
+            borderBottom: '1px solid rgba(33,28,22,0.16)'
+          }}
+        >
+          {categories.map((name, i) => {
+            const isHovered = hoverCat === i;
+            const isDimmed = hoverCat >= 0 && !isHovered;
+            const meta = categoryMeta[name] || {};
+            const count = (products[name] || []).length;
+
+            return (
+              <button
+                key={name}
+                type="button"
+                onClick={() => handleCategoryClick(name)}
+                onMouseEnter={() => setHoverCat(i)}
+                className="cat-row"
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '70px 1fr auto',
+                  alignItems: 'center',
+                  width: '100%',
+                  textAlign: 'left',
+                  border: 'none',
+                  borderTop: '1px solid rgba(33,28,22,0.16)',
+                  background: 'none',
+                  cursor: 'pointer',
+                  padding: '26px 8px',
+                  position: 'relative',
+                  zIndex: 1
+                }}
+              >
+                <span style={{
+                  fontFamily: 'var(--sans)',
+                  fontSize: '11px',
+                  letterSpacing: '2px',
+                  color: '#8B8272'
+                }}>0{i + 1}</span>
+
+                <span className="cat-row-name" style={{
+                  fontFamily: 'var(--serif)',
+                  fontSize: 'clamp(22px, 5vw, 46px)',
+                  fontWeight: 500,
+                  lineHeight: 1,
+                  fontStyle: isHovered ? 'italic' : 'normal',
+                  color: isHovered ? 'var(--accent)' : (isDimmed ? 'rgba(33,28,22,0.28)' : '#211C16'),
+                  transform: isHovered ? 'translateX(18px)' : 'none',
+                  transition: 'transform 0.45s cubic-bezier(0.2,0.6,0.2,1), color 0.3s ease'
+                }}>
+                  {name}
+                </span>
+
+                <span className="cat-row-count" style={{
+                  fontFamily: 'var(--sans)',
+                  fontSize: '10.5px',
+                  letterSpacing: '2px',
+                  color: isHovered ? 'var(--accent)' : '#8B8272',
+                  opacity: isHovered ? 1 : (isDimmed ? 0.3 : 0.65),
+                  transform: isHovered ? 'translateX(-8px)' : 'none',
+                  transition: 'transform 0.45s cubic-bezier(0.2,0.6,0.2,1), opacity 0.3s ease, color 0.3s ease'
+                }}>
+                  {count > 0 ? `${count} FEATURED` : `${meta.studioCount || 25}+ SWATCHES`}&nbsp;&nbsp;→
+                </span>
+              </button>
+            );
+          })}
+
+          {/* Floating Cursor Preview Window */}
+          <div 
+            ref={previewRef}
+            style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              width: '320px',
+              aspectRatio: '4/5',
+              pointerEvents: 'none',
+              zIndex: 2,
+              overflow: 'hidden',
+              opacity: hoverCat >= 0 ? 1 : 0,
+              boxShadow: '0 40px 90px rgba(33,28,22,0.35)',
+              transform: `translate(${previewPos.x}px, ${previewPos.y}px) rotate(-2deg)`,
+              transition: 'opacity 0.35s ease, transform 0.6s cubic-bezier(0.16,0.7,0.2,1)'
+            }}
+          >
+            {categories.map((name, i) => {
+              const meta = categoryMeta[name] || {};
+              return (
+                <span 
+                  key={name}
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage: `url(${meta.hero || heroLiving})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    opacity: hoverCat === i ? 1 : 0,
+                    transform: hoverCat === i ? 'scale(1.05)' : 'scale(1)',
+                    transition: 'opacity 0.45s ease, transform 1.4s ease'
+                  }}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. BRANDS WE CARRY SHOWCASE (32 Premium Brands) */}
+      <section className="sec-pad" style={{
+        padding: '100px 56px',
+        background: '#FAF7F2',
+        borderTop: '1px solid rgba(33,28,22,0.06)'
+      }}>
+        <div className="reveal" style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          flexWrap: 'wrap',
+          gap: '24px',
+          marginBottom: '48px'
+        }}>
+          <div>
+            <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '14px', fontWeight: 600 }}>
+              CURATED GLOBAL ALLIANCES
+            </div>
+            <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 5.5vw, 48px)', margin: 0 }}>
+              Brands We <em style={{ fontStyle: 'italic' }}>Carry.</em>
+            </h2>
+          </div>
+          <p style={{ fontSize: '14.5px', color: '#6A6357', maxWidth: '420px', margin: 0, lineHeight: 1.7 }}>
+            Official representatives for over 30 leading international and Indian furnishing powerhouses.
+          </p>
+        </div>
+
+        {/* Brand Chips Grid */}
+        <div className="reveal" style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+          gap: '14px'
+        }}>
+          {brands.map((b, idx) => (
+            <div
+              key={idx}
+              className="brand-card"
+              style={{
+                background: '#FFFFFF',
+                border: '1px solid #E5DFD4',
+                padding: '16px 20px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                transition: 'all 0.25s ease'
+              }}
+            >
+              <div style={{
+                fontFamily: 'var(--serif)',
+                fontSize: '18px',
+                fontWeight: 500,
+                color: '#211C16',
+                marginBottom: '4px'
+              }}>
+                {b.name}
+              </div>
+              <div style={{ fontSize: '11px', color: '#8A8274', letterSpacing: '0.5px' }}>
+                {b.category}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 7. AI Teaser Section */}
       <section className="ai-teaser" style={{
         background: 'var(--deep)',
         color: '#EFEBE3',
@@ -216,14 +559,14 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
         gap: 0,
         transition: 'background-color 0.5s ease'
       }}>
-        <div className="sec-pad ai-teaser-text" style={{ padding: '96px 56px 96px 56px', alignSelf: 'center' }}>
+        <div className="sec-pad ai-teaser-text" style={{ padding: '96px 56px', alignSelf: 'center' }}>
           <div style={{
             fontSize: '11px',
             letterSpacing: '3.5px',
             color: '#C98A5E',
             marginBottom: '26px',
             fontWeight: 500
-          }}>NEW · AI DESIGN ASSISTANT</div>
+          }}>AI DIGITAL STUDIO</div>
           <h2 style={{
             fontFamily: 'var(--serif)',
             fontWeight: 500,
@@ -242,7 +585,7 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
             maxWidth: '430px',
             marginBottom: '40px'
           }}>
-            Pick a category. Choose your mood, colour palette and style. Our AI generates photorealistic concept images of your space — then our atelier brings them to life.
+            Pick a category. Choose your mood, colour palette and style. Our AI generates photorealistic concepts — then our Vadodara studio brings them to life.
           </p>
           <button
             type="button"
@@ -274,281 +617,36 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
           gap: '14px',
           padding: '26px 26px 26px 0'
         }}>
-          <div style={{
-            aspectRatio: '1/0.92',
-            background: `#46564B url(${aiShelves}) center/cover no-repeat`
-          }}></div>
-          <div style={{
-            aspectRatio: '1/0.92',
-            background: `#E7E2D9 url(${aiChair}) center/cover no-repeat`
-          }}></div>
-          <div style={{
-            aspectRatio: '1/0.92',
-            background: `#E7E2D9 url(${aiBridge}) center/cover no-repeat`
-          }}></div>
-          <div style={{
-            aspectRatio: '1/0.92',
-            background: `#46564B url(${aiKitchen}) center/cover no-repeat`
-          }}></div>
+          <div style={{ aspectRatio: '1/0.92', background: `#46564B url(${aiShelves}) center/cover no-repeat` }}></div>
+          <div style={{ aspectRatio: '1/0.92', background: `#E7E2D9 url(${aiChair}) center/cover no-repeat` }}></div>
+          <div style={{ aspectRatio: '1/0.92', background: `#E7E2D9 url(${aiBridge}) center/cover no-repeat` }}></div>
+          <div style={{ aspectRatio: '1/0.92', background: `#46564B url(${aiKitchen}) center/cover no-repeat` }}></div>
         </div>
       </section>
 
-      {/* Collections Section */}
-      <section className="sec-pad" style={{ padding: '96px 56px 110px' }}>
-        <div className="collections-head" style={{
-          display: 'flex',
-          alignItems: 'flex-end',
-          justifyContent: 'space-between',
-          marginBottom: '44px'
+      {/* 8. Showroom Flagship Centre Section */}
+      <section className="sec-pad" style={{ padding: '96px 56px 110px', background: '#FCFAF6' }}>
+        <div className="reveal showroom-grid" style={{
+          display: 'grid',
+          gridTemplateColumns: '1.2fr 1fr',
+          gap: '64px',
+          background: '#EAE3D5',
+          border: '1px solid rgba(33,28,22,0.06)',
+          overflow: 'hidden'
         }}>
-          <div>
-            <div style={{
-              fontSize: '11px',
-              letterSpacing: '3.5px',
-              color: 'var(--accent)',
-              marginBottom: '16px',
-              fontWeight: 500
-            }}>THE COLLECTIONS</div>
-            <h2 style={{
-              fontFamily: 'var(--serif)',
-              fontWeight: 500,
-              fontSize: 'clamp(32px, 6vw, 52px)',
-              lineHeight: 1.05,
-              letterSpacing: '-0.5px'
-            }}>
-              Everything for the<br />
-              <em style={{ fontStyle: 'italic' }}>considered</em> home.
-            </h2>
-          </div>
-          <p style={{
-            fontSize: '15px',
-            lineHeight: 1.7,
-            color: '#5C554A',
-            maxWidth: '320px',
-            marginBottom: '6px'
-          }}>
-            Eight made-to-order collections, each finished by hand in Gujarat.
-          </p>
-        </div>
-
-        {/* Hover-Sensitive Collections List */}
-        <div 
-          onMouseMove={handleMouseMove}
-          onMouseLeave={() => setHoverCat(-1)}
-          style={{
-            position: 'relative',
-            borderBottom: '1px solid rgba(33,28,22,0.16)'
-          }}
-        >
-          {CATS.map((name, i) => {
-            const isHovered = hoverCat === i;
-            const isDimmed = hoverCat >= 0 && !isHovered;
-
-            return (
-              <button
-                key={name}
-                type="button"
-                onClick={() => handleCategoryClick(name)}
-                onMouseEnter={() => setHoverCat(i)}
-                className="cat-row"
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '80px 1fr auto',
-                  alignItems: 'center',
-                  width: '100%',
-                  textAlign: 'left',
-                  border: 'none',
-                  borderTop: '1px solid rgba(33,28,22,0.16)',
-                  background: 'none',
-                  cursor: 'pointer',
-                  padding: '30px 8px',
-                  position: 'relative',
-                  zIndex: 1
-                }}
-              >
-                <span style={{
-                  fontFamily: 'var(--sans)',
-                  fontSize: '11px',
-                  letterSpacing: '2px',
-                  color: '#8B8272'
-                }}>0{i + 1}</span>
-
-                <span className="cat-row-name" style={{
-                  fontFamily: 'var(--serif)',
-                  fontSize: 'clamp(22px, 6vw, 54px)',
-                  fontWeight: 500,
-                  lineHeight: 1,
-                  fontStyle: isHovered ? 'italic' : 'normal',
-                  color: isHovered ? 'var(--accent)' : (isDimmed ? 'rgba(33,28,22,0.28)' : '#211C16'),
-                  transform: isHovered ? 'translateX(18px)' : 'none',
-                  transition: 'transform 0.45s cubic-bezier(0.2,0.6,0.2,1), color 0.3s ease'
-                }}>
-                  {name}
-                </span>
-
-                <span className="cat-row-count" style={{
-                  fontFamily: 'var(--sans)',
-                  fontSize: '10.5px',
-                  letterSpacing: '2.5px',
-                  color: isHovered ? 'var(--accent)' : '#8B8272',
-                  opacity: isHovered ? 1 : (isDimmed ? 0.3 : 0.65),
-                  transform: isHovered ? 'translateX(-8px)' : 'none',
-                  transition: 'transform 0.45s cubic-bezier(0.2,0.6,0.2,1), opacity 0.3s ease, color 0.3s ease'
-                }}>
-                  {CAT_COUNTS[i]} MATERIALS&nbsp;&nbsp;→
-                </span>
-              </button>
-            );
-          })}
-
-          {/* Floating Cursor Preview Window */}
-          <div 
-            ref={previewRef}
-            style={{
-              position: 'absolute',
-              left: 0,
-              top: 0,
-              width: '320px',
-              aspectRatio: '4/5',
-              pointerEvents: 'none',
-              zIndex: 2,
-              overflow: 'hidden',
-              opacity: hoverCat >= 0 ? 1 : 0,
-              boxShadow: '0 40px 90px rgba(33,28,22,0.35)',
-              transform: `translate(${previewPos.x}px, ${previewPos.y}px) rotate(-2deg)`,
-              transition: 'opacity 0.35s ease, transform 0.6s cubic-bezier(0.16,0.7,0.2,1)'
-            }}
-          >
-            {CATS.map((name, i) => (
-              <span 
-                key={name}
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  backgroundImage: `url(${IMGS[i]})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  opacity: hoverCat === i ? 1 : 0,
-                  transform: hoverCat === i ? 'scale(1.05)' : 'scale(1)',
-                  transition: 'opacity 0.45s ease, transform 1.4s ease'
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Curated Moodboards Section */}
-      <section className="sec-pad" style={{ padding: '110px 56px', background: '#FAF6F0', borderTop: '1px solid rgba(33,28,22,0.06)' }}>
-        <div className="reveal" style={{ marginBottom: '56px' }}>
-          <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>STYLED CONCEPT MOODBOARDS</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 52px)', lineHeight: 1.05, letterSpacing: '-0.5px' }}>
-            Mix &amp; match <em style={{ fontStyle: 'italic' }}>our collections.</em>
-          </h2>
-          <p style={{ fontSize: '16.5px', lineHeight: 1.8, color: '#5C554A', maxWidth: '560px', marginTop: '16px' }}>
-            Explore curated design palettes put together by our studio decorators to help you combine drapery, fabrics, and textures.
-          </p>
-        </div>
-
-        <div className="reveal moodboard-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
-          {/* Moodboard A */}
-          <div style={{ background: '#FCFAF6', border: '1px solid rgba(33,28,22,0.06)', overflow: 'hidden', transition: 'box-shadow 0.3s ease' }} className="moodboard-card">
-            <div className="moodboard-img-wrap" style={{ height: '420px', overflow: 'hidden' }}>
-              <img 
-                src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1000&q=80" 
-                alt="The Kutch Ochre Minimalist" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s ease' }} 
-                className="moodboard-img"
-              />
-            </div>
-            <div style={{ padding: '36px' }}>
-              <div style={{ fontSize: '10px', letterSpacing: '2.5px', color: 'var(--accent)', marginBottom: '12px', fontWeight: 600 }}>PALETTE 01</div>
-              <h3 style={{ fontFamily: 'var(--serif)', fontSize: '28px', fontWeight: 500, marginBottom: '16px', color: '#211C16' }}>The Kutch Ochre Minimalist</h3>
-              <p style={{ fontSize: '14.5px', lineHeight: 1.7, color: '#6B6458', marginBottom: '24px' }}>
-                Anchored by our 2027 Mitti fabric, this layout pairs warm sand plaster walls, golden oak flooring, and raw linen sheer curtains to create a bright, earth-bound sanctuary.
-              </p>
-              <button 
-                type="button" 
-                onClick={() => handleCategoryClick('Curtains')}
-                style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, fontFamily: 'var(--sans)', fontSize: '11px', letterSpacing: '2px', color: '#211C16', borderBottom: '1px solid #211C16', paddingBottom: '4px', fontWeight: 500 }}
-              >
-                VIEW CORRESPONDING FABRICS →
-              </button>
-            </div>
-          </div>
-
-          {/* Moodboard B */}
-          <div style={{ background: '#FCFAF6', border: '1px solid rgba(33,28,22,0.06)', overflow: 'hidden', transition: 'box-shadow 0.3s ease' }} className="moodboard-card">
-            <div className="moodboard-img-wrap" style={{ height: '420px', overflow: 'hidden' }}>
-              <img
-                src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=1000&q=80"
-                alt="The Indigo Dwelling" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s ease' }} 
-                className="moodboard-img"
-              />
-            </div>
-            <div style={{ padding: '36px' }}>
-              <div style={{ fontSize: '10px', letterSpacing: '2.5px', color: 'var(--accent)', marginBottom: '12px', fontWeight: 600 }}>PALETTE 02</div>
-              <h3 style={{ fontFamily: 'var(--serif)', fontSize: '28px', fontWeight: 500, marginBottom: '16px', color: '#211C16' }}>The Indigo Dwelling</h3>
-              <p style={{ fontSize: '14.5px', lineHeight: 1.7, color: '#6B6458', marginBottom: '24px' }}>
-                A serene contrast of deep natural indigo linen curtains, paired with fine off-white cotton upholstery and dark iron hardware accents. Ideal for cozy bedrooms and library corners.
-              </p>
-              <button 
-                type="button" 
-                onClick={() => handleCategoryClick('Upholstery Fabrics')}
-                style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, fontFamily: 'var(--sans)', fontSize: '11px', letterSpacing: '2px', color: '#211C16', borderBottom: '1px solid #211C16', paddingBottom: '4px', fontWeight: 500 }}
-              >
-                VIEW CORRESPONDING FABRICS →
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="sec-pad" style={{ padding: '110px 56px', background: '#FCFAF6', borderTop: '1px solid rgba(33,28,22,0.06)' }}>
-        <div className="reveal" style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <div style={{ fontSize: '11px', letterSpacing: '3.5px', color: 'var(--accent)', marginBottom: '18px', fontWeight: 500 }}>COMMUNITY &amp; PRESS</div>
-          <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(30px, 6vw, 52px)', lineHeight: 1.05 }}>
-            Living with <em style={{ fontStyle: 'italic' }}>Aesthetics.</em>
-          </h2>
-        </div>
-
-        <div className="reveal testimonial-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', maxWidth: '1080px', margin: '0 auto' }}>
-          <div style={{ borderLeft: '3px solid var(--accent)', paddingLeft: '28px' }}>
-            <p style={{ fontFamily: 'var(--serif)', fontSize: '21px', fontStyle: 'italic', lineHeight: 1.6, color: '#2C271F', marginBottom: '18px' }}>
-              “Aesthetics transformed our Alkapuri residence. The Mitti curtains catch the morning light beautifully, and the tailoring craftsmanship is unmatched in India.”
-            </p>
-            <div style={{ fontSize: '11.5px', letterSpacing: '1px', color: '#8B8272', fontWeight: 500 }}>
-              ANANYA PATEL · RESIDENT, VADODARA
-            </div>
-          </div>
-          <div style={{ borderLeft: '3px solid var(--accent)', paddingLeft: '28px' }}>
-            <p style={{ fontFamily: 'var(--serif)', fontSize: '21px', fontStyle: 'italic', lineHeight: 1.6, color: '#2C271F', marginBottom: '18px' }}>
-              “As an architect, I appreciate their commitment to exact custom specs. Their Pit-loomed silk and linen fabrics have become a staple in my contemporary projects.”
-            </p>
-            <div style={{ fontSize: '11.5px', letterSpacing: '1px', color: '#8B8272', fontWeight: 500 }}>
-              DEVANG SHAH · PRINCIPAL ARCHITECT, STUDIO D
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Showroom Flagship Centre Section */}
-      <section className="sec-pad" style={{ padding: '0 56px 110px', background: '#FCFAF6' }}>
-        <div className="reveal showroom-grid" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '64px', background: '#EAE3D5', border: '1px solid rgba(33,28,22,0.06)', overflow: 'hidden' }}>
           <div className="showroom-text" style={{ padding: '74px 64px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div style={{ fontSize: '10px', letterSpacing: '3px', color: 'var(--accent)', marginBottom: '20px', fontWeight: 600 }}>OUR EXPERIENCE STUDIO</div>
             <h2 style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(28px, 5.5vw, 48px)', lineHeight: 1.1, marginBottom: '24px', color: '#211C16' }}>
               Visit our flagship <em style={{ fontStyle: 'italic' }}>Atelier.</em>
             </h2>
             <p style={{ fontSize: '15px', lineHeight: 1.8, color: '#5C554A', marginBottom: '32px', maxWidth: '440px' }}>
-              Feel the weight of the weave in person. Browse our full range of loom textiles, custom wallpapers, and wood floor finishes near Race Course Circle, Vadodara.
+              Feel the weight of the weave in person. Browse our 30+ brand collections, handloom textiles, custom wallpapers, and wood flooring finishes near Race Course Circle, Vadodara.
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '13px', color: '#6B6458', marginBottom: '36px', fontFamily: 'ui-monospace, monospace' }}>
-              <div>📍 Race Course Circle, Alkapuri, Vadodara — 390007</div>
-              <div>🕒 Open daily: 10:00 AM – 7:30 PM</div>
-              <div>📞 +91 265 235 1972</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '13px', color: '#6B6458', marginBottom: '36px' }}>
+              <div>📍 <strong>Address:</strong> Race Course Circle, Alkapuri, Vadodara, Gujarat 390007</div>
+              <div>📞 <strong>Sales:</strong> +91 9913132736 &nbsp;|&nbsp; <strong>General:</strong> +91 9998852736</div>
+              <div>🤝 <strong>Partner With Us:</strong> +91 9725116871</div>
+              <div>✉️ <strong>Email:</strong> Aesthetics.jhv@gmail.com</div>
             </div>
             <div>
               <button 
@@ -580,11 +678,15 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
         .accent-button:hover {
           background-color: var(--accent-dark) !important;
         }
-        .moodboard-card:hover .moodboard-img {
-          transform: scale(1.04);
+        .client-card:hover {
+          background: rgba(255, 255, 255, 0.08) !important;
+          border-color: rgba(255, 255, 255, 0.2) !important;
+          transform: translateY(-2px);
         }
-        .moodboard-card:hover {
-          box-shadow: 0 20px 40px rgba(33,28,22,0.08) !important;
+        .brand-card:hover {
+          border-color: var(--accent) !important;
+          box-shadow: 0 8px 24px rgba(33,28,22,0.06);
+          transform: translateY(-2px);
         }
         .showroom-btn:hover {
           background-color: var(--accent) !important;
@@ -601,28 +703,26 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
           .home-hero-img {
             aspect-ratio: 4/3.2 !important;
           }
+          .story-container {
+            grid-template-columns: 1fr !important;
+            gap: 36px !important;
+          }
           .fabric-band-btn {
             flex-direction: column !important;
             align-items: flex-start !important;
             gap: 12px !important;
-            padding-top: 22px !important;
-            padding-bottom: 22px !important;
+            padding: 22px 24px !important;
           }
           .fabric-band-title {
             padding-left: 0 !important;
             padding-right: 0 !important;
             font-size: 19px !important;
           }
-          .philosophy-grid {
-            grid-template-columns: 1fr !important;
-            gap: 36px !important;
-          }
           .ai-teaser {
             grid-template-columns: 1fr !important;
           }
           .ai-teaser-text {
-            padding-top: 64px !important;
-            padding-bottom: 48px !important;
+            padding: 64px 24px 48px !important;
           }
           .ai-teaser-imgs {
             padding: 0 24px 56px !important;
@@ -632,29 +732,15 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
             align-items: flex-start !important;
             gap: 16px !important;
           }
-          .collections-head p {
-            max-width: none !important;
-          }
           .cat-row {
             grid-template-columns: 32px 1fr !important;
-            padding: 22px 4px !important;
+            padding: 20px 4px !important;
             row-gap: 8px !important;
           }
           .cat-row-count {
             grid-column: 2 / 3;
             font-size: 9.5px !important;
             letter-spacing: 1.5px !important;
-          }
-          .moodboard-grid {
-            grid-template-columns: 1fr !important;
-            gap: 24px !important;
-          }
-          .moodboard-img-wrap {
-            height: 300px !important;
-          }
-          .testimonial-grid {
-            grid-template-columns: 1fr !important;
-            gap: 40px !important;
           }
           .showroom-grid {
             grid-template-columns: 1fr !important;
@@ -664,16 +750,6 @@ export default function HomeView({ onNavigate, onSelectCategory }) {
           }
           .showroom-img-wrap {
             min-height: 260px !important;
-          }
-        }
-
-        @media (max-width: 420px) {
-          .fabric-band-eyebrow {
-            font-size: 9.5px !important;
-            letter-spacing: 2px !important;
-          }
-          .fabric-band-cta {
-            font-size: 9.5px !important;
           }
         }
       `}</style>

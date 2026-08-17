@@ -9,6 +9,7 @@ import CustomizeView from './components/CustomizeView';
 import FabricView from './components/FabricView';
 import AtelierView from './components/AtelierView';
 import VisitView from './components/VisitView';
+import AdminView from './components/AdminView';
 
 const ACCENTS = {
   Terracotta: ['#B4592F', '#9E4A24'],
@@ -35,24 +36,52 @@ export default function App() {
   const [category, setCategory] = useState(null);
   const [productId, setProductId] = useState(null);
 
-  // Deep-linking from query parameters
+  // Deep-linking from query parameters and hashes
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const viewParam = params.get('view');
-    const catParam = params.get('category');
-    const productParam = params.get('product');
-    if (viewParam && ['home', 'collections', 'category', 'product', 'customize', 'fabric', 'atelier', 'visit'].includes(viewParam)) {
-      setView(viewParam);
-    }
-    if (catParam) {
-      setCategory(catParam);
-    }
-    if (productParam) {
-      setProductId(productParam);
-    }
+    const handleUrlCheck = () => {
+      const params = new URLSearchParams(window.location.search);
+      const viewParam = params.get('view');
+      const catParam = params.get('category');
+      const productParam = params.get('product');
+      const hash = window.location.hash;
+
+      if (viewParam && ['home', 'collections', 'category', 'product', 'customize', 'fabric', 'atelier', 'visit', 'admin'].includes(viewParam)) {
+        setView(viewParam);
+      } else if (hash === '#admin') {
+        setView('admin');
+      }
+
+      if (catParam) {
+        setCategory(catParam);
+      }
+      if (productParam) {
+        setProductId(productParam);
+      }
+    };
+
+    handleUrlCheck();
+    window.addEventListener('popstate', handleUrlCheck);
+    window.addEventListener('hashchange', handleUrlCheck);
+    return () => {
+      window.removeEventListener('popstate', handleUrlCheck);
+      window.removeEventListener('hashchange', handleUrlCheck);
+    };
   }, []);
 
-  // Live Theme Controls (originally editor props)
+  // Keyboard shortcut (Ctrl + Shift + A or Cmd + Shift + A) to toggle Admin Panel secretly
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        setView(prev => prev === 'admin' ? 'home' : 'admin');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Live Theme Controls
   const [accent, setAccent] = useState('Terracotta');
   const [deepTone, setDeepTone] = useState('Forest');
   const [serif, setSerif] = useState('Cormorant');
@@ -73,6 +102,14 @@ export default function App() {
 
   const handleNavigate = (targetView) => {
     setView(targetView);
+    // Update URL parameter cleanly without full reload
+    const url = new URL(window.location);
+    if (targetView === 'home') {
+      url.searchParams.delete('view');
+    } else {
+      url.searchParams.set('view', targetView);
+    }
+    window.history.pushState({}, '', url);
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
@@ -83,6 +120,11 @@ export default function App() {
   const handleSelectProduct = (id) => {
     setProductId(id);
   };
+
+  // Dedicated full-screen Admin View
+  if (view === 'admin') {
+    return <AdminView onNavigate={handleNavigate} />;
+  }
 
   return (
     <div style={{
@@ -135,7 +177,7 @@ export default function App() {
 
       <Footer onNavigate={handleNavigate} />
 
-      {/* Floating Premium Theme Customizer (Wow Factor) */}
+      {/* Floating Theme Customizer */}
       <div className="theme-widget" style={{
         position: 'fixed',
         bottom: '24px',
@@ -162,6 +204,7 @@ export default function App() {
             transition: 'transform 0.3s ease'
           }}
           className="theme-toggle-btn"
+          title="Atelier Customizer"
         >
           🎨
         </button>

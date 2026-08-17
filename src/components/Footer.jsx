@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { getStoredContact } from '../data/storage';
 
 export default function Footer({ onNavigate }) {
   const [email, setEmail] = useState('');
+  const contact = getStoredContact();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,7 +21,7 @@ export default function Footer({ onNavigate }) {
     }}>
       <div className="footer-grid" style={{
         display: 'grid',
-        gridTemplateColumns: '2fr 1fr 1fr 1fr',
+        gridTemplateColumns: '2fr 1.1fr 1.1fr 1.2fr',
         gap: '40px',
         paddingBottom: '50px',
         borderBottom: '1px solid rgba(255, 255, 255, 0.12)'
@@ -35,15 +37,18 @@ export default function Footer({ onNavigate }) {
             fontSize: '9.5px',
             letterSpacing: '3.5px',
             color: '#9DA79C',
-            marginBottom: '22px'
+            marginBottom: '20px',
+            fontWeight: 600
           }}>BY JAYLAXMI HOUSE</div>
           <p style={{
             fontSize: '14px',
-            lineHeight: 1.7,
+            lineHeight: 1.75,
             color: '#A9AFA4',
-            maxWidth: '300px',
+            maxWidth: '320px',
             margin: 0
-          }}>Premium, made-to-order home furnishings — crafted in Vadodara since 1972.</p>
+          }}>
+            Five decades of heritage—crafted with honesty, quality, and timeless craftsmanship in Vadodara.
+          </p>
         </div>
 
         <div>
@@ -51,7 +56,8 @@ export default function Footer({ onNavigate }) {
             fontSize: '10.5px',
             letterSpacing: '2.5px',
             color: '#8F988D',
-            marginBottom: '18px'
+            marginBottom: '18px',
+            fontWeight: 600
           }}>EXPLORE</div>
           <div style={{
             display: 'flex',
@@ -64,7 +70,7 @@ export default function Footer({ onNavigate }) {
               onClick={() => onNavigate('collections')} 
               style={{ border: 'none', background: 'none', color: '#C7C6BC', textAlign: 'left', cursor: 'pointer', padding: 0, fontFamily: 'var(--sans)', fontSize: '14px' }}
             >
-              Collections
+              The 9 Collections
             </button>
             <button 
               type="button" 
@@ -85,7 +91,7 @@ export default function Footer({ onNavigate }) {
               onClick={() => onNavigate('atelier')} 
               style={{ border: 'none', background: 'none', color: '#C7C6BC', textAlign: 'left', cursor: 'pointer', padding: 0, fontFamily: 'var(--sans)', fontSize: '14px' }}
             >
-              Atelier
+              Our Story &amp; Atelier
             </button>
           </div>
         </div>
@@ -95,16 +101,19 @@ export default function Footer({ onNavigate }) {
             fontSize: '10.5px',
             letterSpacing: '2.5px',
             color: '#8F988D',
-            marginBottom: '18px'
-          }}>STUDIO</div>
+            marginBottom: '18px',
+            fontWeight: 600
+          }}>STUDIO &amp; CONTACT</div>
           <div style={{
-            fontSize: '14px',
+            fontSize: '13.5px',
             lineHeight: 1.7,
             color: '#A9AFA4'
           }}>
-            Race Course Circle<br />
-            Vadodara 390007<br />
-            +91 98000 00000
+            Race Course Circle, Alkapuri<br />
+            Vadodara, Gujarat 390007<br />
+            <span style={{ color: '#E8C9AF' }}>Sales:</span> +91 9913132736<br />
+            <span style={{ color: '#E8C9AF' }}>General:</span> +91 9998852736<br />
+            <span style={{ color: '#E8C9AF' }}>Partner:</span> +91 9725116871
           </div>
         </div>
 
@@ -113,18 +122,21 @@ export default function Footer({ onNavigate }) {
             fontSize: '10.5px',
             letterSpacing: '2.5px',
             color: '#8F988D',
-            marginBottom: '18px'
-          }}>NEWSLETTER</div>
+            marginBottom: '18px',
+            fontWeight: 600
+          }}>CONNECT</div>
           <div style={{
-            fontSize: '14px',
+            fontSize: '13.5px',
             lineHeight: 1.7,
             color: '#A9AFA4',
             marginBottom: '14px'
-          }}>Seasonal lookbooks, quietly.</div>
+          }}>
+            Email: <a href="mailto:Aesthetics.jhv@gmail.com" style={{ color: '#EFEBE3' }}>Aesthetics.jhv@gmail.com</a>
+          </div>
           <form onSubmit={handleSubmit} style={{ display: 'flex', borderBottom: '1px solid rgba(255, 255, 255, 0.25)' }}>
             <input 
               type="email" 
-              placeholder="Email" 
+              placeholder="Your email for lookbooks" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               style={{
@@ -134,7 +146,7 @@ export default function Footer({ onNavigate }) {
                 color: '#EFEBE3',
                 padding: '6px 0',
                 fontFamily: 'var(--sans)',
-                fontSize: '14px'
+                fontSize: '13px'
               }}
               required
             />
@@ -164,8 +176,8 @@ export default function Footer({ onNavigate }) {
         letterSpacing: '1px',
         color: '#8F988D'
       }}>
-        <span>© 1972–2026 Jaylaxmi House</span>
-        <span>Vadodara · Gujarat · India</span>
+        <span>© Jaylaxmi Furnishings · Aesthetics 2017–2026</span>
+        <span>Race Course Circle · Vadodara · Gujarat · India</span>
       </div>
 
       <style>{`
